@@ -6,6 +6,7 @@
   "main": "dist/wfd-vue.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
+    "build-example": "vue-cli-service build ./example/main.js",
     "build": "vue-cli-service build --target lib --name wfd-vue ./src/index.js"
   },
   "files": [

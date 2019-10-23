@@ -1,5 +1,6 @@
 const merge = require('webpack-merge');
 module.exports = {
+  // publicPath:'/wfd-vue/',
   pages: {
     index: {
       entry: 'example/main.js',
