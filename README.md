@@ -1,19 +1,11 @@
 # wfd-vue
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
+应大家的要求快速做了一个vue的版本，但是打包发布到npm这里还没搞定。。。
+### 运行example例子
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 目前打包这里还没搞定。。。
 ```
 npm run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
