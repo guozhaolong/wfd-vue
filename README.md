@@ -6,7 +6,7 @@
 
 应大家的要求快速做了一个vue的版本，但是打包发布到npm这里还没搞定，只能直接用源码了。。。
 ## Online Demo
-https://guozhaolong.github.io/wfd-vue
+https://guozhaolong.github.io/wfd-vue/index.html
 
 ### Demo
 ```
