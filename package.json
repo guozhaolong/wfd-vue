@@ -6,8 +6,7 @@
   "main": "dist/wfd-vue.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "bundle": "vue-cli-service build --target lib --name wfd-vue ./src/index.js"
+    "build": "vue-cli-service build --target lib --name wfd-vue ./src/index.js"
   },
   "files": [
     "dist"
