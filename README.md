@@ -4,7 +4,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/wfd.svg?style=flat)](https://www.npmjs.org/package/wfd)
 ![](https://img.shields.io/badge/license-MIT-000000.svg)
 
-应大家的要求快速做了一个vue的版本，但是打包发布到npm这里还没搞定。。。
+应大家的要求快速做了一个vue的版本，但是打包发布到npm这里还没搞定，只能直接用源码了。。。
 ### Demo
 ```
 npm run serve
