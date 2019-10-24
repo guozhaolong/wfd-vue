@@ -1,4 +1,6 @@
-const Util = require('@antv/g6/src/util');
+const each = require('@antv/util/lib/each');
+const vec2 = require('@antv/util/lib/matrix/vec2');
+const mix = require('@antv/util/lib/mix');
 
 export default function(G6){
   G6.registerBehavior('itemAlign', {
@@ -30,17 +32,17 @@ export default function(G6){
       const lc = { x: bbox.x, y: bbox.y + bbox.height / 2 };
       const rc = { x: bbox.x + bbox.width, y: bbox.y + bbox.height / 2 };
       const nodes = this.graph.getNodes();
-      Util.each(nodes, (node) => {
+      each(nodes, (node) => {
         const horizontalLines = [];
         const verticalLines = [];
         let p = null;
         const bbox1 = node.getBBox();
-        Util.each(this.getHorizontalLines(bbox1), (line) => {
+        each(this.getHorizontalLines(bbox1), (line) => {
           horizontalLines.push(this.getDistance(line,ct));
           horizontalLines.push(this.getDistance(line,cc));
           horizontalLines.push(this.getDistance(line,cb));
         });
-        Util.each(this.getVerticalLines(bbox1), (line) => {
+        each(this.getVerticalLines(bbox1), (line) => {
           verticalLines.push(this.getDistance(line,lc));
           verticalLines.push(this.getDistance(line,cc));
           verticalLines.push(this.getDistance(line,rc));
@@ -69,7 +71,7 @@ export default function(G6){
       const lineStyle = this.alignLineStyle;
       const lineArr = this._alignLines;
       if(p.horizontals){
-        Util.each(p.horizontals, function(lineObj) {
+        each(p.horizontals, function(lineObj) {
           const line = lineObj.line;
           const point = lineObj.point;
           const lineHalf = (line[0] + line[2]) / 2;
@@ -81,12 +83,12 @@ export default function(G6){
             x1 = point.x + bbox.width / 2;
             x2 = Math.min(line[0], line[2]);
           }
-          const shape = group.addShape('line', { attrs: Util.mix({ x1, y1: line[1], x2, y2: line[1] }, lineStyle), capture: false });
+          const shape = group.addShape('line', { attrs: mix({ x1, y1: line[1], x2, y2: line[1] }, lineStyle), capture: false });
           lineArr.push(shape);
         })
       }
       if(p.verticals){
-        Util.each(p.verticals, function(lineObj) {
+        each(p.verticals, function(lineObj) {
           const line = lineObj.line;
           const point = lineObj.point;
           const lineHalf = (line[1] + line[3]) / 2;
@@ -98,7 +100,7 @@ export default function(G6){
             y1 = point.y + bbox.height / 2;
             y2 = Math.min(line[1], line[3]);
           }
-          const shape = group.addShape('line', { attrs: Util.mix({ x1: line[0], y1, x2: line[0], y2 }, lineStyle), capture: false });
+          const shape = group.addShape('line', { attrs: mix({ x1: line[0], y1, x2: line[0], y2 }, lineStyle), capture: false });
           lineArr.push(shape);
         })
       }
@@ -122,13 +124,13 @@ export default function(G6){
     },
     pointLineDistance: function(lineX1, lineY1, lineX2, lineY2, pointX, pointY) {
       const lineLength = [lineX2 - lineX1, lineY2 - lineY1];
-      if (Util.vec2.exactEquals(lineLength, [0, 0])) return NaN;
+      if (vec2.exactEquals(lineLength, [0, 0])) return NaN;
       let s = [-lineLength[1], lineLength[0]];
-      Util.vec2.normalize(s, s);
-      return Math.abs(Util.vec2.dot([pointX - lineX1, pointY - lineY1], s));
+      vec2.normalize(s, s);
+      return Math.abs(vec2.dot([pointX - lineX1, pointY - lineY1], s));
     },
     _clearAlignLine(){
-      Util.each(this._alignLines, (line) => {
+      each(this._alignLines, (line) => {
         line.remove();
       });
       this._alignLines = [];
