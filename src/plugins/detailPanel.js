@@ -1,8 +1,5 @@
-const deepMix = require('@antv/util/lib/deep-mix');
-const each = require('@antv/util/lib/each');
-const wrapBehavior = require('@antv/util/lib/event/wrap-behavior');
-const createDOM = require('@antv/util/lib/dom/create-dom');
-const modifyCSS = require('@antv/util/lib/dom/modify-css');
+import G6 from '@antv/g6';
+const { deepMix,each,wrapBehavior,modifyCSS } = G6.Util;
 
 class DetailPanel {
 
