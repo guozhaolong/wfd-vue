@@ -6,7 +6,6 @@
 
 ![image](https://github.com/guozhaolong/wfd-vue/raw/master/example/snapshots/1.jpg)
 
-npm包的umd.min文件900k，我再琢磨一下...
 ## Online Demo
 https://guozhaolong.github.io/wfd-vue/
 
