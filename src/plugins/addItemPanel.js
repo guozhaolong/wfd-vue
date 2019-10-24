@@ -1,6 +1,5 @@
 const deepMix = require('@antv/util/lib/deep-mix');
 const each = require('@antv/util/lib/each');
-const wrapBehavior = require('@antv/util/lib/event/wrap-behavior');
 const createDOM = require('@antv/util/lib/dom/create-dom');
 
 class AddItemPanel {
