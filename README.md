@@ -6,7 +6,7 @@
 
 npm包的umd.min文件900k，我再琢磨一下...
 ## Online Demo
-https://guozhaolong.github.io/wfd-vue/index.html
+https://guozhaolong.github.io/wfd-vue/
 
 ## Usage
 ```
@@ -27,12 +27,12 @@ export default {
     return {
       lang: "zh",
       demoData: {...},
-      demoData1: {...},
       candidateUsers: [...],
       candidateGroups: [...]
     }
   }
 }
+</script>
 ```
 
 ## API
