@@ -1,6 +1,6 @@
 {
   "name": "wfd-vue",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "private": false,
   "description": "a workflow designer base on @antv/g6",
   "main": "dist/wfd-vue.umd.min.js",
@@ -52,6 +52,6 @@
     "raw-loader": "^3.1.0",
     "sass-loader": "^8.0.0",
     "vue-template-compiler": "^2.6.10",
-    "wfd-vue": "^1.0.8"
+    "wfd-vue": "^1.0.9"
   }
 }

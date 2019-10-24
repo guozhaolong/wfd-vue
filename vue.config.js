@@ -5,11 +5,17 @@ module.exports = {
   configureWebpack: config => {
     if(process.env.NODE_ENV === 'production') {
       config.externals = {
+        "@antv/g6":{
+          commonjs: "@antv/g6",
+          commonjs2: "@antv/g6",
+          amd: "@antv/g6",
+          root: "G6"
+        },
         "@antv/g6/src": {
           commonjs: "@antv/g6/src",
           commonjs2: "@antv/g6/src",
           amd: "@antv/g6/src",
-          root: "antvG6"
+          root: "G6"
         },
         "@antv/g6/src/util": {
           commonjs: "@antv/g6/src/util",
