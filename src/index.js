@@ -1,9 +1,12 @@
 import Wfd from './components/Wfd';
 
-Wfd.install = function(Vue) {
+const install = (Vue) => {
   Vue.component(Wfd.name, Wfd);
 };
 
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue);
+}
 
 
 export default Wfd;

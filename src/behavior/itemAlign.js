@@ -1,7 +1,5 @@
-import G6 from '@antv/g6';
-const {mix,each,vec2} = G6.Util;
-
 export default function(G6){
+  const {mix,each,vec2} = G6.Util;
   G6.registerBehavior('itemAlign', {
     getDefaultCfg() {
       return {

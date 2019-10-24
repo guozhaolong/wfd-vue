@@ -18,9 +18,6 @@
   </div>
 </template>
 <script>
-  import Vue from 'vue'
-  import ElementUI from 'element-ui'
-  import 'element-ui/lib/theme-chalk/index.css'
   import G6 from '@antv/g6/src';
   import { getShapeName } from '../util/clazz'
   import Command from '../plugins/command'
@@ -36,7 +33,6 @@
   import registerBehavior from '../behavior'
   registerShape(G6);
   registerBehavior(G6);
-  Vue.use(ElementUI);
   export default {
     name: "wfd-vue",
     components: {
@@ -145,7 +141,6 @@
         window.addEventListener("resize", this.resizeFunc);
       },
       onItemCfgChange(key,value){
-        console.log(key,value);
         const items = this.graph.get('selectedItems');
         if(items && items.length > 0){
           const item = this.graph.findById(items[0]);

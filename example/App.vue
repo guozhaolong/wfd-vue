@@ -10,8 +10,12 @@
 </template>
 
 <script>
+import WfdVue from 'wfd-vue'
 export default {
   name: 'app',
+  components:{
+    WfdVue
+  },
   data () {
     return {
       modalVisible:false,
