@@ -4,6 +4,8 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/wfd-vue.svg?style=flat)](https://www.npmjs.org/package/wfd-vue)
 ![](https://img.shields.io/badge/license-MIT-000000.svg)
 
+![image](https://github.com/guozhaolong/wfd-vue/raw/master/example/snapshots/1.jpg)
+
 npm包的umd.min文件900k，我再琢磨一下...
 ## Online Demo
 https://guozhaolong.github.io/wfd-vue/
