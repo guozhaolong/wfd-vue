@@ -1,5 +1,6 @@
 import editorStyle from "../util/defaultStyle";
-import Item from '@antv/g6/src/item/item';
+import createAnchor from '../item/anchor';
+
 const dashArray = [
   [0,1],
   [0,2],
@@ -40,50 +41,11 @@ export default function(G6) {
     drawAnchor(group) {
       const bbox = group.get('children')[0].getBBox();
       this.getAnchorPoints().forEach((p, i) => {
-        const anchorContainer = group.addGroup();
-        const anchor = new Item({
-          type: 'anchor',
-          group: anchorContainer,
-          capture: false,
-          index: i,
-          isActived: false,
-          model: {
-            style: {
-              x: bbox.minX + bbox.width * p[0],
-              y: bbox.minY + bbox.height * p[1],
-              ...editorStyle.anchorPointStyle,
-              cursor: editorStyle.cursor.hoverEffectiveAnchor,
-            }
-          },
-        });
-        anchor.isAnchor = true;
-        anchor.toFront();
-        let hotpot;
-        anchor.showHotpot = function () {
-          hotpot = anchorContainer.addShape('marker', {
-            attrs: {
-              x: bbox.minX + bbox.width * p[0],
-              y: bbox.minY + bbox.height * p[1],
-              ...editorStyle.anchorHotsoptStyle
-            }
-          });
-          hotpot.toFront();
-          anchor.getKeyShape().toFront();
-        };
-        anchor.setActived = function () {
-          anchor.update({style: {...editorStyle.anchorPointHoverStyle}});
-        };
-        anchor.clearActived = function () {
-          anchor.update({style: {...editorStyle.anchorPointStyle}});
-        };
-        anchor.setHotspotActived = function (act) {
-          hotpot &&
-          (act ?
-            hotpot.attr(editorStyle.anchorHotsoptActivedStyle)
-            : hotpot.attr(editorStyle.anchorHotsoptStyle))
-        };
-
-        group.anchorShapes.push(anchorContainer);
+        const anchor = createAnchor(i,{
+          x: bbox.minX + bbox.width * p[0],
+          y: bbox.minY + bbox.height * p[1]
+        }, group);
+        group.anchorShapes.push(anchor);
         group.getAllAnchors = () => {
           return group.anchorShapes.map(c => {
             c.filter(a => a.isAnchor)
@@ -217,17 +179,7 @@ export default function(G6) {
       }else if(!cfg.hideIcon && icon && !icon.get('visible')){
         icon.show();
       }
-    },
-    initStyle(cfg){
-      // cfg.selectedColor = this.selectedColor;
-      // cfg.unSelectedColor = this.unSelectedColor;
-      // cfg.icon = this.icon;
-      // cfg.iconWidth = this.iconWidth;
-      // cfg.iconHeight = this.iconHeight;
-      // cfg.iconPaddingTop = this.iconPaddingTop;
-      // cfg.iconPaddingLeft = this.iconPaddingLeft;
-      return cfg;
-    },
+    }
   }, 'single-shape');
 
 }

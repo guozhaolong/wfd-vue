@@ -129,7 +129,6 @@ export default function(G6) {
     },
     getShapeStyle(cfg) {
       cfg.size = [80, 44];
-      cfg = this.initStyle(cfg);
       const width = cfg.size[0];
       const height = cfg.size[1];
       const style = {
@@ -150,7 +149,6 @@ export default function(G6) {
     },
     getShapeStyle(cfg) {
       cfg.size = [40, 40];
-      cfg = this.initStyle(cfg);
       const width = cfg.size[0];
       const height = cfg.size[1];
       const gap = 4;
@@ -231,7 +229,6 @@ export default function(G6) {
     },
     getShapeStyle(cfg) {
       cfg.size = [30, 30];
-      cfg = this.initStyle(cfg);
       const width = cfg.size[0];
       const style = {
         x: 0,
@@ -271,7 +268,6 @@ export default function(G6) {
     },
     getShapeStyle(cfg) {
       cfg.size = [30, 30];
-      cfg = this.initStyle(cfg);
       const width = cfg.size[0];
       const style = {
         x: 0,
@@ -312,7 +308,6 @@ export default function(G6) {
     },
     getShapeStyle(cfg) {
       cfg.size = [50, 30];
-      cfg = this.initStyle(cfg);
       const width = cfg.size[0];
       const height = cfg.size[1];
       const style = {
