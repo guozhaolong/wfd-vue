@@ -1,5 +1,12 @@
 import editorStyle from "../util/defaultStyle";
-import _ from 'lodash';
+const uniqBy = (arr,key)=>{
+  const result = [];
+  arr.forEach( i => {
+    if(!result.find(r => r[key] === i[key]))
+      result.push(i)
+  });
+  return result;
+};
 
 export default function(G6){
   G6.registerEdge('flow-polyline-round', {
@@ -219,7 +226,7 @@ export default function(G6){
     AStar(points, sPoint, tPoint, sBBox, tBBox){
       const openList = [sPoint];
       const closeList = [];
-      points = _.uniqBy(this.fillId(points),'id');
+      points = uniqBy(this.fillId(points),'id');
       points.push(tPoint);
       let endPoint;
       while(openList.length > 0){

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import WfdVue from 'wfd-vue'
+import WfdVue from '../src/components/Wfd'
 export default {
   name: 'app',
   components:{

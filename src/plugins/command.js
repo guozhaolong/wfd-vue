@@ -1,5 +1,6 @@
-import G6 from '@antv/g6';
-const { mix,clone,isString } = G6.Util;
+const mix = require('@antv/util/lib/mix');
+const clone = require('@antv/util/lib/clone');
+const isString = require('@antv/util/lib/type/is-string');
 
 class Command{
 

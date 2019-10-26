@@ -1,4 +1,4 @@
-import _ from 'lodash';
+const deepMix = require('@antv/util/lib/deep-mix');
 import editorStyle from "../util/defaultStyle";
 
 const taskDefaultOptions = {
@@ -337,7 +337,7 @@ export default function(G6) {
     }
   }, 'base-node');
   G6.registerNode('user-task-node', {
-    options: _.merge({},taskDefaultOptions,{
+    options: deepMix({},taskDefaultOptions,{
       icon: require('../assets/icons/flow/icon_user.svg'),
       style: {
         fill: '#E7F7FE',
@@ -351,7 +351,7 @@ export default function(G6) {
     }),
   }, 'task-node');
   G6.registerNode('script-task-node', {
-    options: _.merge({},taskDefaultOptions,{
+    options: deepMix({},taskDefaultOptions,{
       icon: require('../assets/icons/flow/icon_script.svg'),
       style: {
         fill: '#FFF7E6',
@@ -365,7 +365,7 @@ export default function(G6) {
     }),
   }, 'task-node');
   G6.registerNode('java-task-node', {
-    options: _.merge({},taskDefaultOptions,{
+    options: deepMix({},taskDefaultOptions,{
       icon: require('../assets/icons/flow/icon_java.svg'),
       style: {
         fill: '#FFF1F0',
@@ -379,7 +379,7 @@ export default function(G6) {
     }),
   }, 'task-node');
   G6.registerNode('mail-task-node', {
-    options: _.merge({},taskDefaultOptions,{
+    options: deepMix({},taskDefaultOptions,{
       icon: require('../assets/icons/flow/icon_mail.svg'),
       style: {
         fill: '#F6FFED',
@@ -393,7 +393,7 @@ export default function(G6) {
     }),
   }, 'task-node');
   G6.registerNode('receive-task-node', {
-    options: _.merge({},taskDefaultOptions,{
+    options: deepMix({},taskDefaultOptions,{
       icon: require('../assets/icons/flow/icon_receive.svg'),
       style: {
         fill: '#FFF0F6',
@@ -407,24 +407,24 @@ export default function(G6) {
     }),
   }, 'task-node');
   G6.registerNode('timer-start-node', {
-    options: _.merge({},startDefaultOptions,{icon: require('../assets/icons/flow/icon_timer.svg')}),
+    options: deepMix({},startDefaultOptions,{icon: require('../assets/icons/flow/icon_timer.svg')}),
     afterDraw(cfg, group) { this.runAnimate(cfg,group) },
   }, 'start-node');
   G6.registerNode('message-start-node', {
-    options: _.merge({},startDefaultOptions,{icon: require('../assets/icons/flow/icon_message.svg')}),
+    options: deepMix({},startDefaultOptions,{icon: require('../assets/icons/flow/icon_message.svg')}),
     afterDraw(cfg, group) { this.runAnimate(cfg,group) },
   }, 'start-node');
   G6.registerNode('signal-start-node', {
-    options: _.merge({},startDefaultOptions,{icon: require('../assets/icons/flow/icon_signal.svg')}),
+    options: deepMix({},startDefaultOptions,{icon: require('../assets/icons/flow/icon_signal.svg')}),
     afterDraw(cfg, group) { this.runAnimate(cfg,group) },
   }, 'start-node');
   G6.registerNode('timer-catch-node', {
-    options: _.merge({},catchDefaultOptions,{icon: require('../assets/icons/flow/icon_timer.svg')}),
+    options: deepMix({},catchDefaultOptions,{icon: require('../assets/icons/flow/icon_timer.svg')}),
   }, 'catch-node');
   G6.registerNode('signal-catch-node', {
-    options: _.merge({},catchDefaultOptions,{icon: require('../assets/icons/flow/icon_signal.svg')}),
+    options: deepMix({},catchDefaultOptions,{icon: require('../assets/icons/flow/icon_signal.svg')}),
   }, 'catch-node');
   G6.registerNode('message-catch-node', {
-    options: _.merge({},catchDefaultOptions,{icon: require('../assets/icons/flow/icon_message.svg')}),
+    options: deepMix({},catchDefaultOptions,{icon: require('../assets/icons/flow/icon_message.svg')}),
   }, 'catch-node');
 }

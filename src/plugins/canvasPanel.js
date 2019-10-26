@@ -1,5 +1,4 @@
-import G6 from '@antv/g6';
-const { deepMix } = G6.Util;
+const deepMix = require('@antv/util/lib/deep-mix');
 
 class CanvasPanel {
 
