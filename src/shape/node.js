@@ -31,7 +31,7 @@ export default function(G6) {
       },
       stateStyles: {
         selected: {
-          fill: 'eee',
+          fill: '#eee',
         },
         hover: {
           cursor: editorStyle.cursor.hoverNode,
