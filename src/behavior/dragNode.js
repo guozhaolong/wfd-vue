@@ -34,28 +34,8 @@ export default function(G6){
       if (!this.get('shouldUpdate').call(this, e)) {
         return;
       }
-      this._update(this.target, e);
-    },
-    onDragEnd(e) {
-      if (!this.shouldEnd.call(this, e)) {
-        return;
-      }
-      if (!this.origin) {
-        return;
-      }
-      const delegateShape = e.item.get('delegateShape');
-      if (delegateShape) {
-        delegateShape.remove();
-        this.target.set('delegateShape', null);
-      }
-      this._update(this.target, e, true);
-      this.point = null;
-      this.origin = null;
-      this.graph.emit('afternodedragend');
-    },
-    _update(item, e, force) {
       const origin = this.origin;
-      const model = item.get('model');
+      const model = this.target.get('model');
       if (!this.point) {
         this.point = {
           x: model.x,
@@ -66,20 +46,41 @@ export default function(G6){
       const y = e.y - origin.y + this.point.y;
       this.origin = { x: e.x, y: e.y };
       this.point = { x, y };
-      if (this.delegate && !force) {
-        this._updateDelegate(item, x, y);
+      if (this.delegate) {
+        this._updateDelegate(this.target, x, y);
+      }
+    },
+    onDragEnd(e) {
+      if (!this.shouldEnd.call(this, e)) {
         return;
       }
+      if (!this.origin) {
+        return;
+      }
+      const delegateShape = e.item.get('delegateShape');
+      if (delegateShape) {
+        const bbox = delegateShape.getBBox();
+        const x = bbox.x + bbox.width/2;
+        const y = bbox.y + bbox.height/2;
+        delegateShape.remove();
+        this.target.set('delegateShape', null);
+        this._updateItem(this.target, { x, y });
+      }
+      this.point = null;
+      this.origin = null;
+      this.graph.emit('afternodedragend');
+    },
+    _updateItem(item, point) {
       if(this.graph.executeCommand) {
         this.graph.executeCommand('update', {
           itemId: item.get('id'),
-          updateModel: {x, y}
+          updateModel: point
         });
       }else {
         if (this.get('updateEdge')) {
-          this.graph.updateItem(item, { x, y });
+          this.graph.updateItem(item, point);
         } else {
-          item.updatePosition({ x, y });
+          item.updatePosition(point);
           this.graph.paint();
         }
       }
@@ -98,6 +99,7 @@ export default function(G6){
             height: bbox.height,
             x: x - bbox.width / 2,
             y: y - bbox.height / 2,
+            nodeId:item.get('id'),
             ...attrs
           }
         });
