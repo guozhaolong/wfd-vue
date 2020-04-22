@@ -1,3 +1,5 @@
+import {getShapeName} from "../util/clazz";
+
 const mix = require('@antv/util/lib/mix');
 const clone = require('@antv/util/lib/clone');
 const isString = require('@antv/util/lib/type/is-string');
@@ -197,7 +199,10 @@ class Command{
         const addModel = this.pasteData.model;
         addModel.x && (addModel.x += 10);
         addModel.y && (addModel.y += 10);
-        delete addModel.id;
+        const { clazz = 'userTask' } = addModel;
+        const timestamp = new Date().getTime();
+        const id = clazz + timestamp;
+        addModel.id = id;
         const item = graph.add(this.pasteData.type, addModel);
         item.toFront();
       },
