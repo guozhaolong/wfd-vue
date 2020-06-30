@@ -10,9 +10,25 @@
                            :value="model.assignType"
                            :disabled="readOnly"
                            @change="(e) => { onChange('assignValue', []);onChange('assignType', e) }">
+                    <el-option key="assignee" value="assignee" :label="i18n['userTask.assignType.assignee']"/>
                     <el-option key="person" value="person" :label="i18n['userTask.assignType.person']"/>
                     <el-option key="persongroup" value="persongroup" :label="i18n['userTask.assignType.persongroup']"/>
                     <el-option key="custom" value="custom" :label="i18n['userTask.assignType.custom']"/>
+                </el-select>
+            </div>
+            <div v-if="model.assignType === 'assignee'" class="panelRow">
+                <div>{{i18n['userTask.assignType.assignee.title']}}：</div>
+                <el-select style="width:90%; font-size:12px"
+                           :placeholder="i18n['userTask.assignType.assignee.placeholder']"
+                           :disabled="readOnly"
+                           :value="model.assignValue"
+                           :multiple="true"
+                           :multiple-limit="1"
+                           allow-create
+                           :filterable="true"
+                           :filter-method="filterUsers"
+                           @change="(e) => onChange('assignValue', e)">
+                    <el-option v-for="user in usersCopy" :key="user.id" :label="user.name" :value="user.id" />
                 </el-select>
             </div>
             <div v-if="model.assignType === 'person'" class="panelRow">
@@ -23,9 +39,9 @@
                            :value="model.assignValue"
                            :multiple="true"
                            :filterable="true"
-                           :filter-method="(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0"
+                           :filter-method="filterUsers"
                            @change="(e) => onChange('assignValue', e)">
-                    <el-option v-for="user in users" :key="user.id" :label="user.name" :value="user.id" />
+                    <el-option v-for="user in usersCopy" :key="user.id" :label="user.name" :value="user.id" />
                 </el-select>
             </div>
             <div v-else-if="model.assignType === 'persongroup'" class="panelRow">
@@ -36,9 +52,9 @@
                            :disabled="readOnly"
                            :multiple="true"
                            :filterable="true"
-                           :filter-method="(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0"
+                           :filter-method="filterGroups"
                            @change="(e) => onChange('assignValue', e)">
-                    <el-option v-for="group in groups" :key="group.id" :label="group.name" :value="group.id" />
+                    <el-option v-for="group in groupsCopy" :key="group.id" :label="group.name" :value="group.id" />
                 </el-select>
             </div>
             <div v-else-if="model.assignType === 'custom'" class="panelRow">
@@ -95,5 +111,35 @@
         default: false,
       }
     },
+    data() {
+      return {
+        usersCopy: this.users,
+        groupsCopy: this.groups,
+      }
+    },
+    methods: {
+      filterUsers(input) {
+        if (input) {
+          this.usersCopy = this.users.filter((item) => {
+            if (!!~item.name.indexOf(input) || !!~item.name.toLowerCase().indexOf(input.toLowerCase())) {
+              return true
+            }
+          })
+        } else {
+          this.usersCopy = this.users;
+        }
+      },
+      filterGroups(input) {
+        if (input) {
+          this.groupsCopy = this.groups.filter((item) => {
+            if (!!~item.name.indexOf(input) || !!~item.name.toLowerCase().indexOf(input.toLowerCase())) {
+              return true
+            }
+          })
+        } else {
+          this.groupsCopy = this.groups;
+        }
+      }
+    }
   }
 </script>

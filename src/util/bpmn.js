@@ -37,6 +37,8 @@ export function exportXML(json,canvas,createFile = true) {
         if(node.assignValue && node.assignValue.length > 0){
           if(node.assignType === 'person'){
             assignments += `flowable:candidateUsers="${node.assignValue.join(',')}"`;
+          }else if(node.assignType === 'assignee'){
+            assignments += `flowable:assignee="${node.assignValue[0]}"`;
           }else if(node.assignType === 'persongroup'){
             assignments += `flowable:candidateGroups="${node.assignValue.join(',')}"`;
           }
