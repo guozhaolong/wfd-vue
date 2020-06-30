@@ -253,7 +253,7 @@ class Command{
       },
       shortcutCodes: [['metaKey', '-'], ['ctrlKey', '-']],
     });
-    cmdPlugin.registerCommand('resetZoom', {
+    cmdPlugin.registerCommand('zoomReset', {
       queue: false,
       execute: function(graph) {
         const zoom = graph.getZoom();
