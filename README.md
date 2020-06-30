@@ -51,6 +51,7 @@ export default {
 ###### 方法
 * save(): 调用this.$refs['wfd'].graph.save()生成json
 * saveXML(): 调用this.$refs['wfd'].graph.saveXML(createFile)生成Flowable XML，createFile参数是否同时生成xml文件，默认为true
+* saveImg(): 调用this.$refs['wfd'].graph.saveImg(createFile)生成图片，createFile参数表示是否生成图片文件，默认为true，该函数返回值为图片base64
 
 
 ### Run Example

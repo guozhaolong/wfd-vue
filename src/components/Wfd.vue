@@ -29,7 +29,7 @@
   import ItemPanel from '../components/ItemPanel'
   import DetailPanel from '../components/DetailPanel'
   import i18n from '../locales'
-  import {exportXML} from "../util/bpmn"
+  import {exportXML,exportImg} from "../util/bpmn"
   import registerShape from '../shape'
   import registerBehavior from '../behavior'
   registerShape(G6);
@@ -198,6 +198,7 @@
         },
       });
       this.graph.saveXML = (createFile = true) => exportXML(this.graph.save(),this.processModel,createFile);
+      this.graph.saveImg = (createFile = true) => exportImg(this.$refs['canvas'],this.processModel.name,createFile);
       if(this.isView)
         this.graph.setMode('view');
       else
