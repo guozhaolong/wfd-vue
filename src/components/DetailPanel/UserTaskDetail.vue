@@ -13,7 +13,6 @@
                     <el-option key="assignee" value="assignee" :label="i18n['userTask.assignType.assignee']"/>
                     <el-option key="person" value="person" :label="i18n['userTask.assignType.person']"/>
                     <el-option key="persongroup" value="persongroup" :label="i18n['userTask.assignType.persongroup']"/>
-                    <el-option key="custom" value="custom" :label="i18n['userTask.assignType.custom']"/>
                 </el-select>
             </div>
             <div v-if="model.assignType === 'assignee'" class="panelRow">
@@ -38,6 +37,7 @@
                            :disabled="readOnly"
                            :value="model.assignValue"
                            :multiple="true"
+                           allow-create
                            :filterable="true"
                            :filter-method="filterUsers"
                            @change="(e) => onChange('assignValue', e)">
@@ -51,18 +51,12 @@
                            :value="model.assignValue"
                            :disabled="readOnly"
                            :multiple="true"
+                           allow-create
                            :filterable="true"
                            :filter-method="filterGroups"
                            @change="(e) => onChange('assignValue', e)">
                     <el-option v-for="group in groupsCopy" :key="group.id" :label="group.name" :value="group.id" />
                 </el-select>
-            </div>
-            <div v-else-if="model.assignType === 'custom'" class="panelRow">
-                <div>{{i18n['userTask.assignType.custom.title']}}：</div>
-                <el-input style="width:90%; font-size:12px"
-                          :value="model.javaClass"
-                          :disabled="readOnly"
-                          @input="(e) => onChange('javaClass', e.target.value)" />
             </div>
             <div class="panelRow">
                 <div style="display:inline">{{i18n['userTask.dueDate']}}：</div>

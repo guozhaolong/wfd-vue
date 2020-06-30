@@ -11,6 +11,7 @@
                    :readOnly="mode !== 'edit'"
                    :users="users"
                    :groups="groups"
+                   :categorys="categorys"
                    :signalDefs="processModel.signalDefs"
                    :messageDefs="processModel.messageDefs"
                    :onChange="(key,val)=>{onItemCfgChange(key,val)}" />
@@ -73,6 +74,10 @@
       groups: {
         type: Array,
         default: () => ([])
+      },
+      categorys: {
+        type: Array,
+        default: () => ([])
       }
     },
     data() {
@@ -82,6 +87,7 @@
         processModel: {
           id: '',
           name: '',
+          category: '',
           clazz: 'process',
           dataObjs: [],
           signalDefs: [],
