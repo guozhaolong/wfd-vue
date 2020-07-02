@@ -13,7 +13,7 @@ https://guozhaolong.github.io/wfd-vue/
 ```
 <template>
   <div id="app">
-    <wfd-vue ref="wfd" :data="demoData" :height="600" :users="candidateUsers" :groups="candidateGroups" :lang="lang" />
+    <wfd-vue ref="wfd" :data="demoData" :height="600" :users="candidateUsers" :groups="candidateGroups" :categorys="categorys" :lang="lang" />
   </div>
 </template>
 
@@ -29,7 +29,8 @@ export default {
       lang: "zh",
       demoData: {...},
       candidateUsers: [...],
-      candidateGroups: [...]
+      candidateGroups: [...],
+      categorys: [...]
     }
   }
 }
@@ -45,10 +46,12 @@ export default {
 * isView: 是否为预览模式（隐藏工具栏和属性栏）
 * users: 选择审批人时对应的数据，数组内对象以id为键，name为值
 * groups: 选择审批组时对应的数据，数组内对象以id为键，name为值
+* categorys: 选择分类时对应的数据，数组内对象以id为键，name为值
 
 ###### 方法
 * save(): 调用this.$refs['wfd'].graph.save()生成json
 * saveXML(): 调用this.$refs['wfd'].graph.saveXML(createFile)生成Flowable XML，createFile参数是否同时生成xml文件，默认为true
+* saveImg(): 调用this.$refs['wfd'].graph.saveImg(createFile)生成图片，createFile参数表示是否生成图片文件，默认为true，该函数返回值为图片base64
 
 
 ### Run Example

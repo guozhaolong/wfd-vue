@@ -11,6 +11,7 @@
                    :readOnly="mode !== 'edit'"
                    :users="users"
                    :groups="groups"
+                   :categorys="categorys"
                    :signalDefs="processModel.signalDefs"
                    :messageDefs="processModel.messageDefs"
                    :onChange="(key,val)=>{onItemCfgChange(key,val)}" />
@@ -28,7 +29,7 @@
   import ItemPanel from '../components/ItemPanel'
   import DetailPanel from '../components/DetailPanel'
   import i18n from '../locales'
-  import {exportXML} from "../util/bpmn"
+  import {exportXML,exportImg} from "../util/bpmn"
   import registerShape from '../shape'
   import registerBehavior from '../behavior'
   registerShape(G6);
@@ -73,6 +74,10 @@
       groups: {
         type: Array,
         default: () => ([])
+      },
+      categorys: {
+        type: Array,
+        default: () => ([])
       }
     },
     data() {
@@ -82,6 +87,7 @@
         processModel: {
           id: '',
           name: '',
+          category: '',
           clazz: 'process',
           dataObjs: [],
           signalDefs: [],
@@ -192,6 +198,7 @@
         },
       });
       this.graph.saveXML = (createFile = true) => exportXML(this.graph.save(),this.processModel,createFile);
+      this.graph.saveImg = (createFile = true) => exportImg(this.$refs['canvas'],this.processModel.name,createFile);
       if(this.isView)
         this.graph.setMode('view');
       else
