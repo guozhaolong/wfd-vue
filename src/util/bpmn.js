@@ -132,8 +132,8 @@ export function exportXML(json,canvas,createFile = true) {
         `${tab(8)}<omgdi:waypoint x="${edge.endPoint.x}" y="${edge.endPoint.y}"></omgdi:waypoint>\n`+
       `${tab(6)}</bpmndi:BPMNEdge>\n`;
     let condition = "";
-    if(edge.coditionExpression){
-      condition = `${tab(6)}<conditionExpression xsi:type="tFormalExpression"><![CDATA[${edge.coditionExpression}]]></conditionExpression>\n`;
+    if(edge.conditionExpression){
+      condition = `${tab(6)}<conditionExpression xsi:type="tFormalExpression"><![CDATA[${edge.conditionExpression}]]></conditionExpression>\n`;
     }
     processXML += `${tab(4)}<sequenceFlow id="${edge.source}_${edge.sourceAnchor}-${edge.target}_${edge.targetAnchor}" sourceRef="${edge.source}" targetRef="${edge.target}">${condition}</sequenceFlow>\n`;
   });
