@@ -1,4 +1,5 @@
 import editorStyle from "../util/defaultStyle";
+
 const uniqBy = (arr,key)=>{
   const result = [];
   arr.forEach( i => {
@@ -104,7 +105,9 @@ export default function(G6){
         path,
         ...style,
         endArrow: {
-          path: 'M 0,0 L -10,-4 S -8 0,-10 4 Z',
+          path: 'M 0,0 L 6,-2 Q 5 0,6 2 Z',
+          lineDash: [ 0, 0 ],
+          fill: editorStyle.edgeStyle.stroke,
         }
       }
     },

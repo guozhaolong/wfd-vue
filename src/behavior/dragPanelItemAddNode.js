@@ -16,7 +16,7 @@ export default function(G6){
       }
     },
     onMouseMove(e){
-      if(this.graph.get('onDragAddNode')){
+      if(this.graph.get('addNodeDragging')){
         let delegateShape = this.graph.get('addDelegateShape');
         const addModel = this.graph.get('addModel');
         const width = parseInt(addModel.size.split('*')[0]);
@@ -44,38 +44,87 @@ export default function(G6){
       }
     },
     onMouseUp(e){
-      if(this.graph.get('onDragAddNode')) {
-        const p = this.graph.getPointByClient(e.clientX,e.clientY);
-        if(p.x > 0 && p.y > 0)
-          this._addNode(p);
+      if (this.graph.get('addNodeDragging')) {
+        const p = this.graph.getPointByClient(e.clientX, e.clientY);
+        const subProcessNode = this.graph.find('node', (node) => {
+          if (node.get('model')) {
+            const clazz = node.get('model').clazz;
+            if (clazz === 'subProcess') {
+              const bbox = node.getBBox();
+              return p.x > bbox.minX && bbox.maxX > p.x
+                && p.y > bbox.minY && bbox.maxY > p.y;
+            }
+          } else {
+            return false;
+          }
+        });
+        if (subProcessNode) {
+          if (p.x > 0 && p.y > 0) {
+            this._addNodeBySubProcess(p, subProcessNode);
+          }
+        } else {
+          if (p.x > 0 && p.y > 0) {
+            this._addNode(p);
+          }
+        }
+      }
+    },
+    _addNodeBySubProcess(p, node) {
+      if (this.graph.get('addNodeDragging')) {
+        const addModel = this.graph.get('addModel');
+        const { clazz = 'userTask' } = addModel;
+        addModel.shape = getShapeName(clazz);
+        addModel.size = addModel.size.split("*");
+        const timestamp = new Date().getTime();
+        const id = clazz + timestamp;
+        const bbox = node.getBBox();
+        const x = p.x - bbox.x - bbox.width / 2;
+        const y = p.y - bbox.y - bbox.height / 2;
+        const nodeCfg = {
+          ...addModel,
+          x,
+          y,
+          id
+        };
+        const group = node.getContainer();
+        const resultModel = group.addNodeModel(node, nodeCfg);
+        if (this.graph.executeCommand) {
+          this.graph.executeCommand('update', {
+            itemId: node.get('id'),
+            updateModel: resultModel,
+          });
+        } else {
+          this.graph.updateItem(node, resultModel);
+        }
       }
     },
     onMouseLeave(e){
-      if(this.graph.get('onDragAddNode')) {
+      if (this.graph.get('addNodeDragging')) {
         this._clearDelegate();
         this.graph.emit('afternodedragend');
       }
     },
     _clearDelegate(){
-      if(this.graph.get('onDragAddNode')) {
-        const delegateShape = this.graph.get('addDelegateShape');
-        if (delegateShape) {
-          delegateShape.remove();
-          this.graph.set('addDelegateShape', null);
-          this.graph.paint();
-        }
+      const delegateShape = this.graph.get('addDelegateShape');
+      if (delegateShape) {
+        delegateShape.remove();
+        this.graph.set('addDelegateShape', null);
+        this.graph.paint();
       }
+      this.graph.emit('afternodedragend');
     },
     _addNode(p){
-      if(this.graph.get('onDragAddNode')) {
+      if (this.graph.get('addNodeDragging')) {
         const addModel = this.graph.get('addModel');
         const { clazz = 'userTask' } = addModel;
+        //type、shape属性同时存在即兼容之前版本的数据，又兼容g6的升级
+        addModel.type = getShapeName(clazz);
         addModel.shape = getShapeName(clazz);
         const timestamp = new Date().getTime();
         const id = clazz + timestamp;
         const x = p.x;
         const y = p.y;
-        if(this.graph.executeCommand) {
+        if (this.graph.executeCommand) {
           this.graph.executeCommand('add', {
             type: 'node',
             addModel: {
@@ -85,7 +134,7 @@ export default function(G6){
               id: id,
             },
           });
-        }else {
+        } else {
           this.graph.add('node', {
             ...addModel,
             x: x,
@@ -93,6 +142,7 @@ export default function(G6){
             id: id,
           });
         }
+        this._clearDelegate();
       }
     }
   });
