@@ -38,7 +38,7 @@
             </span>
         </el-tooltip>
         <el-tooltip :content="this.i18n['tooltip.zoomReset']" placement="bottom">
-            <span class="command" data-command="zoomReset">
+            <span class="command" data-command="resetZoom">
                 <span class="iconfont icon-actual-size-o"/>
             </span>
         </el-tooltip>

@@ -1,7 +1,5 @@
-const deepMix = require('@antv/util/lib/deep-mix');
-const each = require('@antv/util/lib/each');
-const wrapBehavior = require('@antv/util/lib/event/wrap-behavior');
-const modifyCSS = require('@antv/util/lib/dom/modify-css');
+import { deepMix, each, wrapBehavior } from '@antv/util';
+import { modifyCSS } from '@antv/dom-util';
 
 class DetailPanel {
 

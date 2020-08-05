@@ -1,4 +1,4 @@
-const deepMix = require('@antv/util/lib/deep-mix');
+import { deepMix } from '@antv/util';
 
 class CanvasPanel {
 
