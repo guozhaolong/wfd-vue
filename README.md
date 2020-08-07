@@ -58,3 +58,6 @@ export default {
 ```
 npm run serve
 ```
+
+## 友情链接（flowable流程设计器，感谢@GoldSubmarine提供）
+https://github.com/GoldSubmarine/workflow-bpmn-modeler
