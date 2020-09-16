@@ -11,6 +11,7 @@
                    :readOnly="mode !== 'edit'"
                    :users="users"
                    :groups="groups"
+                   :categorys="categorys"
                    :signalDefs="processModel.signalDefs"
                    :messageDefs="processModel.messageDefs"
                    :onChange="(key,val)=>{onItemCfgChange(key,val)}" />
@@ -18,7 +19,7 @@
   </div>
 </template>
 <script>
-  import G6 from '@antv/g6/src';
+  import G6 from '@antv/g6/lib';
   import { getShapeName } from '../util/clazz'
   import Command from '../plugins/command'
   import Toolbar from '../plugins/toolbar'
@@ -28,7 +29,7 @@
   import ItemPanel from '../components/ItemPanel'
   import DetailPanel from '../components/DetailPanel'
   import i18n from '../locales'
-  import {exportXML} from "../util/bpmn"
+  import {exportXML,exportImg} from "../util/bpmn"
   import registerShape from '../shape'
   import registerBehavior from '../behavior'
   registerShape(G6);
@@ -73,6 +74,10 @@
       groups: {
         type: Array,
         default: () => ([])
+      },
+      categorys: {
+        type: Array,
+        default: () => ([])
       }
     },
     data() {
@@ -82,6 +87,7 @@
         processModel: {
           id: '',
           name: '',
+          category: '',
           clazz: 'process',
           dataObjs: [],
           signalDefs: [],
@@ -126,7 +132,10 @@
       initEvents(){
         this.graph.on('afteritemselected',(items)=>{
           if(items && items.length > 0) {
-            const item = this.graph.findById(items[0]);
+            let item = this.graph.findById(items[0]);
+            if(!item){
+              item = this.getNodeInSubProcess(items[0])
+            }
             this.selectedModel = {...item.getModel()};
           } else {
             this.selectedModel = this.processModel;
@@ -143,7 +152,10 @@
       onItemCfgChange(key,value){
         const items = this.graph.get('selectedItems');
         if(items && items.length > 0){
-          const item = this.graph.findById(items[0]);
+          let item = this.graph.findById(items[0]);
+          if(!item){
+            item = this.getNodeInSubProcess(items[0])
+          }
           if(this.graph.executeCommand) {
             this.graph.executeCommand('update', {
               itemId: items[0],
@@ -158,7 +170,29 @@
           this.selectedModel = canvasModel;
           this.processModel = canvasModel;
         }
-      }
+      },
+      getNodeInSubProcess(itemId){
+        const subProcess = this.graph.find('node', (node) => {
+          if (node.get('model')) {
+            const clazz = node.get('model').clazz;
+            if (clazz === 'subProcess') {
+              const containerGroup = node.getContainer();
+              const subGroup = containerGroup.subGroup;
+              const item = subGroup.findById(itemId);
+              return subGroup.contain(item);
+            } else {
+              return false;
+            }
+          } else {
+            return false;
+          }
+        });
+        if(subProcess) {
+          const group = subProcess.getContainer();
+          return group.getItem(subProcess, itemId);
+        }
+        return null;
+      },
     },
     destroyed(){
       window.removeEventListener("resize", this.resizeFunc);
@@ -184,14 +218,15 @@
         modes: {
           default: ['drag-canvas', 'clickSelected'],
           view: [ ],
-          edit: ['drag-canvas', 'hoverNodeActived','hoverAnchorActived','dragNode','dragEdge',
-            'dragPanelItemAddNode','clickSelected','deleteItem','itemAlign'],
+          edit: [ 'drag-canvas', 'hoverNodeActived','hoverAnchorActived','dragNode','dragEdge',
+            'dragPanelItemAddNode','clickSelected','deleteItem','itemAlign','dragPoint','brush-select'],
         },
         defaultEdge: {
           shape: 'flow-polyline-round',
         },
       });
       this.graph.saveXML = (createFile = true) => exportXML(this.graph.save(),this.processModel,createFile);
+      this.graph.saveImg = (createFile = true) => exportImg(this.$refs['canvas'],this.processModel.name,createFile);
       if(this.isView)
         this.graph.setMode('view');
       else

@@ -37,6 +37,8 @@ export function exportXML(json,canvas,createFile = true) {
         if(node.assignValue && node.assignValue.length > 0){
           if(node.assignType === 'person'){
             assignments += `flowable:candidateUsers="${node.assignValue.join(',')}"`;
+          }else if(node.assignType === 'assignee'){
+            assignments += `flowable:assignee="${node.assignValue[0]}"`;
           }else if(node.assignType === 'persongroup'){
             assignments += `flowable:candidateGroups="${node.assignValue.join(',')}"`;
           }
@@ -130,8 +132,8 @@ export function exportXML(json,canvas,createFile = true) {
         `${tab(8)}<omgdi:waypoint x="${edge.endPoint.x}" y="${edge.endPoint.y}"></omgdi:waypoint>\n`+
       `${tab(6)}</bpmndi:BPMNEdge>\n`;
     let condition = "";
-    if(edge.coditionExpression){
-      condition = `${tab(6)}<conditionExpression xsi:type="tFormalExpression"><![CDATA[${edge.coditionExpression}]]></conditionExpression>\n`;
+    if(edge.conditionExpression){
+      condition = `${tab(6)}<conditionExpression xsi:type="tFormalExpression"><![CDATA[${edge.conditionExpression}]]></conditionExpression>\n`;
     }
     processXML += `${tab(4)}<sequenceFlow id="${edge.source}_${edge.sourceAnchor}-${edge.target}_${edge.targetAnchor}" sourceRef="${edge.source}" targetRef="${edge.target}">${condition}</sequenceFlow>\n`;
   });
@@ -157,19 +159,67 @@ export function exportXML(json,canvas,createFile = true) {
   xml += processXML;
   xml += BPMNDiagram;
   xml += `</definitions>`;
-  if(createFile){
-    const blob = new Blob([xml], { type: 'application/xml;charset=utf-8;' });
-    const filename = `${name}.bpmn20.xml`;
-    let link = document.createElement('a');
-    if (link.download !== undefined) {
-      let url = URL.createObjectURL(blob);
-      link.setAttribute('href', url);
-      link.setAttribute('download', filename);
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
+  if(createFile) {
+    downloadFile(xml, 'application/xml;charset=utf-8;', `${name}.bpmn20.xml`)
   }
   return xml;
+}
+
+export function exportImg(canvasPanel,filename,createFile = true) {
+  filename = filename || 'flow'
+  let canvas = canvasPanel.querySelector('canvas')
+  let context = canvas.getContext('2d')
+
+  let imgData = context.getImageData(0, 0, canvas.width, canvas.height).data
+  let left = canvas.width;
+  let right = 0;
+  let top = canvas.height;
+  let bottom = 0
+  for (let i = 0; i < canvas.width; i++) {
+    for (let j = 0; j < canvas.height; j++) {
+      let pos = (i + canvas.width * j) * 4
+      if (imgData[pos] > 0 || imgData[pos + 1] > 0 || imgData[pos + 2] || imgData[pos + 3] > 0) {
+        bottom = Math.max(j, bottom) // 找到有色彩的最下端
+        right = Math.max(i, right) // 找到有色彩的最右端
+        top = Math.min(j, top) // 找到有色彩的最上端
+        left = Math.min(i, left) // 找到有色彩的最左端
+      }
+    }
+  }
+  let c = document.createElement('canvas')
+  // 四周空白余量
+  let blankWidth = 60
+  c.width = right - left + blankWidth*2
+  c.height = bottom - top + blankWidth*2
+  let ctx = c.getContext('2d')
+  // 设置白底
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, c.width, c.height);
+  ctx.drawImage(canvas, left-blankWidth, top-blankWidth, c.width, c.height, 0, 0, c.width, c.height)
+  let data = c.toDataURL("image/jpeg")
+  if(createFile) {
+    let parts = data.split(';base64,');
+    let contentType = parts[0].split(':')[1];
+    let raw = window.atob(parts[1]);
+    let uInt8Array = new Uint8Array(raw.length);
+    for (let i = 0; i < raw.length; ++i) {
+      uInt8Array[i] = raw.charCodeAt(i);
+    }
+    downloadFile(uInt8Array, contentType, `${filename}.jpg`)
+  }
+  return data
+}
+
+function downloadFile(data, type, filename) {
+  const blob = new Blob([data], { type });
+  let link = document.createElement('a');
+  if (link.download !== undefined) {
+    let url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', filename);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 }

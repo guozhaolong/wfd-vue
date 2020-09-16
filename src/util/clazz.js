@@ -17,6 +17,7 @@ export function getShapeName(clazz) {
     case 'timerCatch': return 'timer-catch-node';
     case 'messageCatch': return 'message-catch-node';
     case 'signalCatch': return 'signal-catch-node';
+    case 'subProcess': return 'sub-process-node';
     default: return 'task-node';
   }
 }

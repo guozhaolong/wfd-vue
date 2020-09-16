@@ -1,13 +1,11 @@
-import {getShapeName} from "../util/clazz";
-
-const mix = require('@antv/util/lib/mix');
-const clone = require('@antv/util/lib/clone');
-const isString = require('@antv/util/lib/type/is-string');
+import { mix, clone, isString } from '@antv/util';
 
 class Command{
 
   constructor() {
-
+    this._cfgs = this.getDefaultCfg();
+    this.list = [];
+    this.queue = [];
   }
 
   getDefaultCfg() {
@@ -22,9 +20,6 @@ class Command{
   }
 
   initPlugin(graph) {
-    this._cfgs = this.getDefaultCfg();
-    this.list = [];
-    this.queue = [];
     this.initCommands();
     graph.getCommands = () => { return this.get('_command').queue };
     graph.getCurrentCommand = () => {
@@ -88,7 +83,28 @@ class Command{
     this.queue = [];
     this.destroyed = true;
   }
-
+  _deleteSubProcessNode(graph, itemId) {
+    const subProcess = graph.find('node', (node) => {
+      if (node.get('model')) {
+        const clazz = node.get('model').clazz;
+        if (clazz === 'subProcess') {
+          const containerGroup = node.getContainer();
+          const subGroup = containerGroup.subGroup;
+          const item = subGroup.findById(itemId);
+          return subGroup.contain(item);
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    });
+    if(subProcess){
+      const group = subProcess.getContainer();
+      const resultModel = group.removeItem(subProcess, itemId);
+      graph.updateItem(subProcess, resultModel);
+    }
+  }
   initCommands(){
     const cmdPlugin = this;
     cmdPlugin.registerCommand('add',{
@@ -131,7 +147,14 @@ class Command{
         const selectedItems = graph.get('selectedItems');
         graph.emit('beforedelete', { items: selectedItems });
         if(selectedItems && selectedItems.length > 0) {
-          selectedItems.forEach(i => graph.remove(i));
+          selectedItems.forEach(i => {
+            const node = graph.findById(i);
+            if (node) {
+              graph.remove(i);
+            } else {
+              cmdPlugin._deleteSubProcessNode(graph, i);
+            }
+          });
         }
         graph.emit('afterdelete', { items: selectedItems });
       },
