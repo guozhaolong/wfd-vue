@@ -60,7 +60,7 @@
         type:Object,
         default: ()=>({}),
       },
-      categorys: {
+      categories: {
         type: Array,
         default: ()=>([]),
       },
@@ -75,19 +75,19 @@
     },
     data() {
       return {
-        categoryCopy: this.categorys,
+        categoryCopy: this.categories,
       }
     },
     methods: {
       filterCategory(input) {
         if (input) {
-          this.categoryCopy = this.categorys.filter((item) => {
+          this.categoryCopy = this.categories.filter((item) => {
             if (!!~item.name.indexOf(input) || !!~item.name.toLowerCase().indexOf(input.toLowerCase())) {
               return true
             }
           })
         } else {
-          this.categoryCopy = this.categorys;
+          this.categoryCopy = this.categories;
         }
       }
     }

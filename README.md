@@ -13,7 +13,7 @@ https://guozhaolong.github.io/wfd-vue/
 ```
 <template>
   <div id="app">
-    <wfd-vue ref="wfd" :data="demoData" :height="600" :users="candidateUsers" :groups="candidateGroups" :categorys="categorys" :lang="lang" />
+    <wfd-vue ref="wfd" :data="demoData" :height="600" :users="candidateUsers" :groups="candidateGroups" :categories="categories" :lang="lang" />
   </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
       demoData: {...},
       candidateUsers: [...],
       candidateGroups: [...],
-      categorys: [...]
+      categories: [...]
     }
   }
 }
@@ -46,7 +46,7 @@ export default {
 * isView: 是否为预览模式（隐藏工具栏和属性栏）
 * users: 选择审批人时对应的数据，数组内对象以id为键，name为值
 * groups: 选择审批组时对应的数据，数组内对象以id为键，name为值
-* categorys: 选择分类时对应的数据，数组内对象以id为键，name为值
+* categories: 选择分类时对应的数据，数组内对象以id为键，name为值
 
 ###### 方法
 * save(): 调用this.$refs['wfd'].graph.save()生成json
