@@ -237,6 +237,9 @@
         this.graph.fitView(5)
       }
       this.initEvents();
+    },
+    created() {
+      this.selectedModel = this.processModel
     }
   };
 </script>
