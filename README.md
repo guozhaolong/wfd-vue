@@ -13,7 +13,7 @@ https://guozhaolong.github.io/wfd-vue/
 ```
 <template>
   <div id="app">
-    <wfd-vue ref="wfd" :data="demoData" :height="600" :users="candidateUsers" :groups="candidateGroups" :categories="categories" :lang="lang" />
+    <wfd-vue ref="wfd" :data="demoData" :process-data="processData" :height="600" :users="candidateUsers" :groups="candidateGroups" :categories="categories" :lang="lang" />
   </div>
 </template>
 
@@ -28,6 +28,7 @@ export default {
     return {
       lang: "zh",
       demoData: {...},
+      processData: {...},
       candidateUsers: [...],
       candidateGroups: [...],
       categories: [...]
@@ -40,6 +41,7 @@ export default {
 ## API
 ###### 属性
 * data: 初始化数据
+* process-data: 初始化流程数据
 * height: 画布高度
 * mode: view为只读，edit为可编辑
 * lang: zh为中文，en为英文

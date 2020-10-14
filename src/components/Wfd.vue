@@ -67,6 +67,18 @@
         type: Object,
         default: () => ({nodes:[],edges:[]})
       },
+      processData: {
+        type: Object,
+        default: () => ({
+          id: '',
+          name: '',
+          category: '',
+          clazz: 'process',
+          dataObjs: [],
+          signalDefs: [],
+          messageDefs: [],
+        })
+      },
       users: {
         type: Array,
         default: () => ([])
@@ -84,15 +96,7 @@
       return {
         resizeFunc: ()=>{},
         selectedModel: {},
-        processModel: {
-          id: '',
-          name: '',
-          category: '',
-          clazz: 'process',
-          dataObjs: [],
-          signalDefs: [],
-          messageDefs: [],
-        },
+        processModel: this.processData,
         graph:null,
         cmdPlugin: null,
       };
