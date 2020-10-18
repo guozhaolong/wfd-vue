@@ -8,7 +8,8 @@
     "serve": "vue-cli-service serve example/main.js",
     "build-example": "vue-cli-service build example/main.js --dest docs",
     "build": "vue-cli-service build --target lib --name wfd-vue src/index.js",
-    "test": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit",
+    "prepare": "npm run build"
   },
   "files": [
     "dist"
