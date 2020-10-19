@@ -146,6 +146,12 @@
           graph.changeSize(page.offsetWidth,height);
         };
         window.addEventListener("resize", this.resizeFunc);
+
+        // 修复删除元素后 toolbar 点击移动到上一层、移动到下一层报错
+        this.graph.on('afterdelete',()=>{
+          this.graph.set('selectedItems', []);
+          this.selectedModel = this.processModel;
+        });
       },
       onItemCfgChange(key,value){
         const items = this.graph.get('selectedItems');
