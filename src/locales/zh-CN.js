@@ -62,7 +62,6 @@ export default {
   'tooltip.toBack': '移到下一层',
   'tooltip.edit': '编辑',
   'process': '流程',
-  'process.category': '分类',
   'process.id': '流程标识',
   'process.name': '流程名称',
   'process.dataObjs': '数据对象',

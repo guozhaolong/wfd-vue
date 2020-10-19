@@ -62,7 +62,6 @@ export default {
   'tooltip.toBack': 'To Back Layer',
   'tooltip.edit': 'Edit',
   'process': 'Workflow',
-  'process.category': 'Category',
   'process.id': 'Workflow ID',
   'process.name': 'Workflow Name',
   'process.dataObjs': 'Data Objects',

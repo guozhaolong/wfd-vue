@@ -3,18 +3,6 @@
         <div class="panelTitle">{{i18n['process']}}</div>
         <div class="panelBody">
             <div class="panelRow">
-                <div>{{i18n['process.category']}}：</div>
-                <el-select style="width:90%; font-size:12px"
-                           :disabled="readOnly"
-                           :value="model.category"
-                           allow-create
-                           :filterable="true"
-                           :filter-method="filterCategory"
-                           @change="(e) => onChange('category', e)">
-                    <el-option v-for="category in categoryCopy" :key="category.id" :label="category.name" :value="category.id" />
-                </el-select>
-            </div>
-            <div class="panelRow">
                 <div>{{i18n['process.id']}}：</div>
                 <el-input style="width:90%; font-size:12px"
                           :disabled="readOnly"
@@ -60,10 +48,6 @@
         type:Object,
         default: ()=>({}),
       },
-      categories: {
-        type: Array,
-        default: ()=>([]),
-      },
       onChange: {
         type: Function,
         default: ()=>{}
@@ -72,25 +56,6 @@
         type: Boolean,
         default: false,
       }
-    },
-    data() {
-      return {
-        categoryCopy: this.categories,
-      }
-    },
-    methods: {
-      filterCategory(input) {
-        if (input) {
-          this.categoryCopy = this.categories.filter((item) => {
-            if (!!~item.name.indexOf(input) || !!~item.name.toLowerCase().indexOf(input.toLowerCase())) {
-              return true
-            }
-          })
-        } else {
-          this.categoryCopy = this.categories;
-        }
-      }
     }
-
   }
 </script>
