@@ -121,6 +121,14 @@ export function exportXML(json,canvas,createFile = true) {
       case 'inclusiveGateway':
         processXML += `${tab(4)}<inclusiveGateway id="${node.id}" name="${node.label}"></inclusiveGateway>\n`;
         break;
+      case 'callActivity': {
+        let calledElement = "";
+        if(node.calledElement){
+          calledElement = `calledElement="${node.calledElement}"`;
+        }
+        processXML += `${tab(4)}<callActivity id="${node.id}" name="${node.label}" ${calledElement}></callActivity>\n`;
+        break;
+      }
       default:
         break;
     }

@@ -18,6 +18,7 @@ export function getShapeName(clazz) {
     case 'messageCatch': return 'message-catch-node';
     case 'signalCatch': return 'signal-catch-node';
     case 'subProcess': return 'sub-process-node';
+    case 'callActivity': return 'call-activity-node';
     default: return 'task-node';
   }
 }

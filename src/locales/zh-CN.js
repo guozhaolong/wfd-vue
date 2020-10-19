@@ -72,4 +72,6 @@ export default {
   'process.dataObjs.type': '类型',
   'process.dataObjs.defaultValue': '默认值',
   'process.signalDef.scope': '作用域',
+  'callActivity': '引用流程',
+  'callActivity.calledElement': '被调用流程'
 };

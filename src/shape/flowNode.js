@@ -444,4 +444,18 @@ export default function(G6) {
   G6.registerNode('message-catch-node', {
     options:  G6.Util.deepMix({},catchDefaultOptions,{icon: require('../assets/icons/flow/icon_message.svg')}),
   }, 'catch-node');
+  G6.registerNode('call-activity-node', {
+    options:  G6.Util.deepMix({},taskDefaultOptions,{
+      icon: require('../assets/icons/flow/icon_call_activity.svg'),
+      style: {
+        fill: '#D0D0FF',
+        stroke: '#9966CC',
+      },
+      stateStyles: {
+        selected: {
+          fill: '#CCB2E6',
+        },
+      }
+    }),
+  }, 'task-node');
 }

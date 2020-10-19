@@ -31,6 +31,9 @@
                 <img :data-item="receiveTaskData"
                      :src="require('../assets/flow/receive-task.svg')" style="width:80px;height:44px" />
                 <div>{{i18n['receiveTask']}}</div>
+                <img :data-item="callActivityData"
+                     :src="require('../assets/flow/call-activity.svg')" style="width:80px;height:44px" />
+                <div>{{i18n['callActivity']}}</div>
             </el-collapse-item>
             <el-collapse-item :title="i18n['gateway']" name="3">
                 <img data-item="{clazz:'exclusiveGateway',size:'40*40',label:''}"
@@ -79,6 +82,7 @@
         javaTaskData: "{clazz:'javaTask',size:'80*44',label:'"+this.i18n['javaTask']+"'}",
         mailTaskData: "{clazz:'mailTask',size:'80*44',label:'"+this.i18n['mailTask']+"'}",
         receiveTaskData: "{clazz:'receiveTask',size:'80*44',label:'"+this.i18n['receiveTask']+"'}",
+        callActivityData: "{clazz:'callActivity',size:'80*44',label:'"+this.i18n['callActivity']+"'}",
       };
     },
   }

@@ -72,4 +72,6 @@ export default {
   'process.dataObjs.type': 'Type',
   'process.dataObjs.defaultValue': 'DefaultValue',
   'process.signalDef.scope': 'Scope',
+  'callActivity': 'Call Activity',
+  'callActivity.calledElement': 'Called Element'
 };
