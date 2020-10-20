@@ -130,10 +130,7 @@
       initEvents(){
         this.graph.on('afteritemselected',(items)=>{
           if(items && items.length > 0) {
-            let item = this.graph.findById(items[0]);
-            if(!item){
-              item = this.getNodeInSubProcess(items[0])
-            }
+            const item = this.graph.findById(items[0]);
             this.selectedModel = {...item.getModel()};
           } else {
             this.selectedModel = this.processModel;
@@ -156,10 +153,7 @@
       onItemCfgChange(key,value){
         const items = this.graph.get('selectedItems');
         if(items && items.length > 0){
-          let item = this.graph.findById(items[0]);
-          if(!item){
-            item = this.getNodeInSubProcess(items[0])
-          }
+          const item = this.graph.findById(items[0]);
           if(this.graph.executeCommand) {
             this.graph.executeCommand('update', {
               itemId: items[0],
@@ -174,28 +168,6 @@
           this.selectedModel = canvasModel;
           this.processModel = canvasModel;
         }
-      },
-      getNodeInSubProcess(itemId){
-        const subProcess = this.graph.find('node', (node) => {
-          if (node.get('model')) {
-            const clazz = node.get('model').clazz;
-            if (clazz === 'subProcess') {
-              const containerGroup = node.getContainer();
-              const subGroup = containerGroup.subGroup;
-              const item = subGroup.findById(itemId);
-              return subGroup.contain(item);
-            } else {
-              return false;
-            }
-          } else {
-            return false;
-          }
-        });
-        if(subProcess) {
-          const group = subProcess.getContainer();
-          return group.getItem(subProcess, itemId);
-        }
-        return null;
       },
     },
     destroyed(){
@@ -223,7 +195,7 @@
           default: ['drag-canvas', 'clickSelected'],
           view: [ ],
           edit: [ 'drag-canvas', 'hoverNodeActived','hoverAnchorActived','dragNode','dragEdge',
-            'dragPanelItemAddNode','clickSelected','deleteItem','itemAlign','dragPoint','brush-select'],
+            'dragPanelItemAddNode','clickSelected','deleteItem','itemAlign'],
         },
         defaultEdge: {
           shape: 'flow-polyline-round',

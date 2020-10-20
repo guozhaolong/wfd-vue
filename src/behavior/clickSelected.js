@@ -43,37 +43,6 @@ export default function(G6){
       this._clearSelected();
       this.graph.emit('afteritemselected',[]);
     },
-    _clearSubProcessSelected() {
-      const subProcessList = this.graph.findAll('node', (node) => {
-        if (node.get('model')) {
-          const clazz = node.get('model').clazz;
-          return clazz === 'subProcess';
-        } else {
-          return false;
-        }
-      });
-      subProcessList.forEach((node) => {
-        const group = node.getContainer();
-        const subGroup = group.subGroup;
-        this._clearGroupSelected(subGroup);
-      });
-    },
-    _clearGroupSelected(group) {
-      const selected = group.findAll((subGroup) => {
-        const node = subGroup.get('item');
-        if (node) {
-          return node.hasState('selected');
-        } else {
-          return false;
-        }
-      });
-      selected.forEach(subGroup => {
-        const node = subGroup.get('item');
-        if (node) {
-          node.setState('selected', false);
-        }
-      });
-    },
     _clearSelected(){
       let selected = this.graph.findAllByState('node', 'selected');
       selected.forEach(node => {
@@ -83,7 +52,6 @@ export default function(G6){
       selected.forEach(edge => {
         this.graph.setItemState(edge, 'selected', false);
       });
-      this._clearSubProcessSelected();
       this.graph.set('selectedItems', []);
     }
   });
