@@ -6,7 +6,11 @@ export function exportXML(json,canvas,createFile = true) {
   const name = canvas.name || "flow";
   let dataObjs = "";
   canvas.dataObjs.forEach(s => {
-    dataObjs += `${tab(4)}<dataObject id="${s.id}" name="${s.name}" itemSubjectRef="xsd:${s.type}"></dataObject>\n`;
+    let extensionElements = "";
+    if(s.defaultValue) {
+      extensionElements = `${tab(6)}<extensionElements><flowable:value><![CDATA[${s.defaultValue}]]></flowable:value></extensionElements>\n`;
+    }
+    dataObjs += `${tab(4)}<dataObject id="${s.id}" name="${s.name}" itemSubjectRef="xsd:${s.type}">\n${extensionElements}${tab(4)}</dataObject>\n`;
   });
   let signals = "";
   canvas.signalDefs.forEach(s => {
