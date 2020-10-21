@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <el-dialog :title="i18n[`process.${table}`]" :visible.sync="dialogVisible" @close="closeDialog" width="60%">
+        <el-dialog :title="i18n[`process.${table}`]" :visible.sync="dialogVisible" @close="closeDialog" append-to-body width="60%">
           <ele-table-editor
               v-if="table === 'dataObjs'"
               ref="dataObjs"
