@@ -47,7 +47,9 @@ export function exportXML(json,canvas,createFile = true) {
             assignments += `flowable:candidateGroups="${node.assignValue.join(',')}"`;
           }
         }
-        processXML += `${tab(4)}<userTask id="${node.id}" name="${node.label}" ${assignments}></userTask>\n`;
+        let dueDate = "";
+        if (node.dueDate) dueDate += `flowable:dueDate="${node.dueDate}"`
+        processXML += `${tab(4)}<userTask id="${node.id}" name="${node.label}" ${assignments} ${dueDate}></userTask>\n`;
         break;
       }
       case 'javaTask': {
