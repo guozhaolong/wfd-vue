@@ -182,7 +182,8 @@ export default function(G6) {
           ],
           lineWidth: 2,
           stroke: this.options.style.stroke,
-        }
+        },
+        draggable: true
       });
       this.runAnimate(cfg,group);
     },
@@ -201,7 +202,8 @@ export default function(G6) {
           ],
           lineWidth: 2,
           stroke: this.options.style.stroke,
-        }
+        },
+        draggable: true
       });
       this.runAnimate(cfg,group);
     },
@@ -215,7 +217,8 @@ export default function(G6) {
           r: 10,
           lineWidth: 2,
           stroke: this.options.style.stroke,
-        }
+        },
+        draggable: true
       });
       this.runAnimate(cfg,group);
     },
@@ -265,7 +268,8 @@ export default function(G6) {
           ],
           fill: this.options.style.stroke,
           stroke: this.options.style.stroke,
-        }
+        },
+        draggable: true
       });
     },
     getAnchorPoints() {
@@ -311,7 +315,8 @@ export default function(G6) {
           ],
           fill: this.options.style.stroke,
           stroke: this.options.style.stroke,
-        }
+        },
+        draggable: true
       });
     },
     getAnchorPoints() {
