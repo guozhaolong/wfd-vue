@@ -7,7 +7,7 @@
 ![image](https://github.com/guozhaolong/wfd-vue/raw/master/example/snapshots/1.jpg)
 
 ## Online Demo
-https://guozhaolong.github.io/wfd-vue/
+https://zengqiu.github.io/wfd-vue/
 
 ## Usage
 ```
