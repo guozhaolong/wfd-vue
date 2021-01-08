@@ -7,13 +7,13 @@
 ![image](https://github.com/guozhaolong/wfd-vue/raw/master/example/snapshots/1.jpg)
 
 ## Online Demo
-https://guozhaolong.github.io/wfd-vue/
+https://zengqiu.github.io/wfd-vue/
 
 ## Usage
 ```
 <template>
   <div id="app">
-    <wfd-vue ref="wfd" :data="demoData" :height="600" :users="candidateUsers" :groups="candidateGroups" :categorys="categorys" :lang="lang" />
+    <wfd-vue ref="wfd" :data="demoData" :process-data="processData" :height="600" :users="candidateUsers" :groups="candidateGroups" :lang="lang" />
   </div>
 </template>
 
@@ -28,9 +28,9 @@ export default {
     return {
       lang: "zh",
       demoData: {...},
+      processData: {...},
       candidateUsers: [...],
       candidateGroups: [...],
-      categorys: [...]
     }
   }
 }
@@ -40,13 +40,13 @@ export default {
 ## API
 ###### 属性
 * data: 初始化数据
+* process-data: 初始化流程数据
 * height: 画布高度
 * mode: view为只读，edit为可编辑
 * lang: zh为中文，en为英文
 * isView: 是否为预览模式（隐藏工具栏和属性栏）
 * users: 选择审批人时对应的数据，数组内对象以id为键，name为值
 * groups: 选择审批组时对应的数据，数组内对象以id为键，name为值
-* categorys: 选择分类时对应的数据，数组内对象以id为键，name为值
 
 ###### 方法
 * save(): 调用this.$refs['wfd'].graph.save()生成json
@@ -58,6 +58,3 @@ export default {
 ```
 npm run serve
 ```
-
-## 友情链接（flowable流程设计器，感谢@GoldSubmarine提供）
-https://github.com/GoldSubmarine/workflow-bpmn-modeler

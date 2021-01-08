@@ -6,7 +6,11 @@ export function exportXML(json,canvas,createFile = true) {
   const name = canvas.name || "flow";
   let dataObjs = "";
   canvas.dataObjs.forEach(s => {
-    dataObjs += `${tab(4)}<dataObject id="${s.id}" name="${s.name}" itemSubjectRef="xsd:${s.type}"></dataObject>\n`;
+    let extensionElements = "";
+    if(s.defaultValue) {
+      extensionElements = `${tab(6)}<extensionElements><flowable:value><![CDATA[${s.defaultValue}]]></flowable:value></extensionElements>\n`;
+    }
+    dataObjs += `${tab(4)}<dataObject id="${s.id}" name="${s.name}" itemSubjectRef="xsd:${s.type}">\n${extensionElements}${tab(4)}</dataObject>\n`;
   });
   let signals = "";
   canvas.signalDefs.forEach(s => {
@@ -43,7 +47,9 @@ export function exportXML(json,canvas,createFile = true) {
             assignments += `flowable:candidateGroups="${node.assignValue.join(',')}"`;
           }
         }
-        processXML += `${tab(4)}<userTask id="${node.id}" name="${node.label}" ${assignments}></userTask>\n`;
+        let dueDate = "";
+        if (node.dueDate) dueDate += `flowable:dueDate="${node.dueDate}"`
+        processXML += `${tab(4)}<userTask id="${node.id}" name="${node.label}" ${assignments} ${dueDate}></userTask>\n`;
         break;
       }
       case 'javaTask': {
@@ -121,6 +127,14 @@ export function exportXML(json,canvas,createFile = true) {
       case 'inclusiveGateway':
         processXML += `${tab(4)}<inclusiveGateway id="${node.id}" name="${node.label}"></inclusiveGateway>\n`;
         break;
+      case 'callActivity': {
+        let calledElement = "";
+        if(node.calledElement){
+          calledElement = `calledElement="${node.calledElement}"`;
+        }
+        processXML += `${tab(4)}<callActivity id="${node.id}" name="${node.label}" ${calledElement}></callActivity>\n`;
+        break;
+      }
       default:
         break;
     }

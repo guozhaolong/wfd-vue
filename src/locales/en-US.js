@@ -62,7 +62,6 @@ export default {
   'tooltip.toBack': 'To Back Layer',
   'tooltip.edit': 'Edit',
   'process': 'Workflow',
-  'process.category': 'Category',
   'process.id': 'Workflow ID',
   'process.name': 'Workflow Name',
   'process.dataObjs': 'Data Objects',
@@ -73,4 +72,6 @@ export default {
   'process.dataObjs.type': 'Type',
   'process.dataObjs.defaultValue': 'DefaultValue',
   'process.signalDef.scope': 'Scope',
+  'callActivity': 'Call Activity',
+  'callActivity.calledElement': 'Called Element'
 };

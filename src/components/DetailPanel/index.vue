@@ -12,7 +12,8 @@
         <FlowDetail v-else-if="model.clazz === 'flow'" :model="model" :onChange="onChange" :readOnly="readOnly" />
         <StartEventDetail v-else-if="model.clazz === 'start'" :model="model" :onChange="onChange" :readOnly="readOnly" />
         <EndEventDetail v-else-if="model.clazz === 'end'" :model="model" :onChange="onChange" :readOnly="readOnly" />
-        <ProcessDetail v-else-if="model.clazz === 'process'" :model="model" :onChange="onChange" :readOnly="readOnly" :categorys="categorys" />
+        <ProcessDetail v-else-if="model.clazz === 'process'" :model="model" :onChange="onChange" :readOnly="readOnly" />
+        <CallActivityDetail v-else-if="model.clazz === 'callActivity'" :model="model" :onChange="onChange" :readOnly="readOnly" />
     </div>
 </template>
 <script>
@@ -29,6 +30,7 @@
   import StartEventDetail from "./StartEventDetail"
   import EndEventDetail from "./EndEventDetail"
   import ProcessDetail from "./ProcessDetail"
+  import CallActivityDetail from "./CallActivityDetail";
   export default {
     inject: ['i18n'],
     components:{
@@ -45,6 +47,7 @@
       StartEventDetail,
       EndEventDetail,
       ProcessDetail,
+      CallActivityDetail,
     },
     props: {
       height: {
@@ -60,10 +63,6 @@
         default: ()=>([]),
       },
       groups: {
-        type: Array,
-        default: ()=>([]),
-      },
-      categorys: {
         type: Array,
         default: ()=>([]),
       },
