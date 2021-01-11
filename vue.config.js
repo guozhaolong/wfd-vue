@@ -1,6 +1,6 @@
 const merge = require('webpack-merge');
 module.exports = {
-  // publicPath:'/wfd-vue/',
+  publicPath:'/wfd-vue/',
   productionSourceMap: false,
   configureWebpack: config => {
     if(process.env.NODE_ENV === 'production') {
