@@ -1,10 +1,8 @@
 ## Workflow Designer for Vue
 
-[![NPM Version](http://img.shields.io/npm/v/wfd-vue.svg?style=flat)](https://www.npmjs.org/package/wfd-vue)
-[![NPM Downloads](https://img.shields.io/npm/dm/wfd-vue.svg?style=flat)](https://www.npmjs.org/package/wfd-vue)
 ![](https://img.shields.io/badge/license-MIT-000000.svg)
 
-![image](https://github.com/guozhaolong/wfd-vue/raw/master/example/snapshots/1.jpg)
+![image](https://github.com/zengqiu/wfd-vue/raw/master/example/snapshots/1.jpg)
 
 ## Online Demo
 https://zengqiu.github.io/wfd-vue/
