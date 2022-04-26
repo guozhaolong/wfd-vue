@@ -17,6 +17,38 @@
                           @input="(value) => {onChange('name', value)}" />
             </div>
             <div class="panelRow">
+              <div>{{i18n['process.form']}}：</div>
+              <el-select style="width:90%; font-size:12px"
+                         :disabled="readOnly"
+                         :value="model.form"
+                         :filterable="true"
+                         clearable
+                         @change="(e) => onChange('form', e)">
+                <el-option v-for="form in formsCopy" :key="form.id" :label="form.name" :value="form.id" />
+              </el-select>
+            </div>
+            <div class="panelRow">
+              <div style="display:inline">{{i18n['timeLimit']}}：</div>
+              <el-input-number style="width: 100px;"
+                               :value="model.timeLimit"
+                               :min="1"
+                               :disabled="readOnly"
+                               controls-position="right"
+                               @change="(e) => {onChange('timeLimit', e)}"></el-input-number>
+              <el-select style="width:80px; font-size:12px; margin-left: 8px;"
+                         :placeholder="i18n['timeLimit.unit']"
+                         :value="model.timeLimitUnit"
+                         :disabled="readOnly"
+                         @change="(e) => onChange('timeLimitUnit', e)">
+                <el-option key="day" value="day" :label="i18n['timeLimit.unit.day']"/>
+                <el-option key="hour" value="hour" :label="i18n['timeLimit.unit.hour']"/>
+                <el-option key="minute" value="minute" :label="i18n['timeLimit.unit.second']"/>
+                <el-option key="second" value="second" :label="i18n['timeLimit.unit.month']"/>
+                <el-option key="month" value="month" :label="i18n['timeLimit.unit.month']"/>
+                <el-option key="year" value="year" :label="i18n['timeLimit.unit.year']"/>
+              </el-select>
+            </div>
+            <div class="panelRow">
                 <div>
                     {{i18n['process.dataObjs']}}：
                     <el-button :disabled="readOnly" size="mini" @click="()=>{showDialog('dataObjs')}">{{i18n['tooltip.edit']}}</el-button>
@@ -78,6 +110,10 @@
         type:Object,
         default: ()=>({}),
       },
+      forms: {
+        type: Array,
+        default: ()=>([]),
+      },
       onChange: {
         type: Function,
         default: ()=>{}
@@ -92,6 +128,8 @@
     },
     data() {
       return {
+        formsCopy: this.forms,
+
         table: '',
         dialogVisible: false,
         dataObjsColumns: [

@@ -23,9 +23,7 @@
                            :value="model.assignValue"
                            :multiple="true"
                            :multiple-limit="1"
-                           allow-create
                            :filterable="true"
-                           :filter-method="filterUsers"
                            @change="(e) => onChange('assignValue', e)">
                     <el-option v-for="user in usersCopy" :key="user.id" :label="user.name" :value="user.id" />
                 </el-select>
@@ -37,9 +35,7 @@
                            :disabled="readOnly"
                            :value="model.assignValue"
                            :multiple="true"
-                           allow-create
                            :filterable="true"
-                           :filter-method="filterUsers"
                            @change="(e) => onChange('assignValue', e)">
                     <el-option v-for="user in usersCopy" :key="user.id" :label="user.name" :value="user.id" />
                 </el-select>
@@ -51,22 +47,53 @@
                            :value="model.assignValue"
                            :disabled="readOnly"
                            :multiple="true"
-                           allow-create
                            :filterable="true"
-                           :filter-method="filterGroups"
                            @change="(e) => onChange('assignValue', e)">
                     <el-option v-for="group in groupsCopy" :key="group.id" :label="group.name" :value="group.id" />
                 </el-select>
             </div>
             <div class="panelRow">
-                <div style="display:inline">{{i18n['userTask.dueDate']}}：</div>
-                <el-date-picker type="datetime"
-                                style="width:90%; min-width:null"
-                                :placeholder="i18n['userTask.dueDate.placeholder']"
-                                :disabled="readOnly"
-                                :value="model.dueDate"
-                                value-format="yyyy-MM-dd HH:mm:ss"
-                                @input="(value) => onChange('dueDate', value)" />
+                <div style="display:inline">{{i18n['timeLimit']}}：</div>
+                <el-input-number style="width: 100px;"
+                                 :value="model.timeLimit"
+                                 :min="1"
+                                 :disabled="readOnly"
+                                 controls-position="right"
+                                 @input="(value) => {onChange('timeLimit', value)}"></el-input-number>
+                <el-select style="width:80px; font-size:12px; margin-left: 8px;"
+                           :placeholder="i18n['timeLimit.unit']"
+                           :value="model.timeLimitUnit"
+                           :disabled="readOnly"
+                           @change="(e) => onChange('timeLimitUnit', e)">
+                  <el-option key="day" value="day" :label="i18n['timeLimit.unit.day']"/>
+                  <el-option key="hour" value="hour" :label="i18n['timeLimit.unit.hour']"/>
+                  <el-option key="minute" value="minute" :label="i18n['timeLimit.unit.second']"/>
+                  <el-option key="second" value="second" :label="i18n['timeLimit.unit.month']"/>
+                  <el-option key="month" value="month" :label="i18n['timeLimit.unit.month']"/>
+                  <el-option key="year" value="year" :label="i18n['timeLimit.unit.year']"/>
+                </el-select>
+            </div>
+            <div class="panelRow">
+              <div>{{i18n['userTask.readonlyFormFields']}}：</div>
+              <el-select style="width:90%; font-size:12px"
+                         :disabled="readOnly"
+                         :value="model.readonlyFormFields"
+                         :multiple="true"
+                         :filterable="true"
+                         @change="(e) => onChange('readonlyFormFields', e)">
+                <el-option v-for="field in formFieldsCopy" :key="field.id" :label="field.name" :value="field.id" />
+              </el-select>
+            </div>
+            <div class="panelRow">
+              <div>{{i18n['userTask.hiddenFormFields']}}：</div>
+              <el-select style="width:90%; font-size:12px"
+                         :disabled="readOnly"
+                         :value="model.hiddenFormFields"
+                         :multiple="true"
+                         :filterable="true"
+                         @change="(e) => onChange('hiddenFormFields', e)">
+                <el-option v-for="field in formFieldsCopy" :key="field.id" :label="field.name" :value="field.id" />
+              </el-select>
             </div>
             <div class="panelRow">
                 <el-checkbox @change="(value) => onChange('isSequential', value)"
@@ -96,6 +123,10 @@
         type: Array,
         default: ()=>([]),
       },
+      formFields: {
+        type: Array,
+        default: ()=>([]),
+      },
       onChange: {
         type: Function,
         default: ()=>{}
@@ -109,30 +140,7 @@
       return {
         usersCopy: this.users,
         groupsCopy: this.groups,
-      }
-    },
-    methods: {
-      filterUsers(input) {
-        if (input) {
-          this.usersCopy = this.users.filter((item) => {
-            if (!!~item.name.indexOf(input) || !!~item.name.toLowerCase().indexOf(input.toLowerCase())) {
-              return true
-            }
-          })
-        } else {
-          this.usersCopy = this.users;
-        }
-      },
-      filterGroups(input) {
-        if (input) {
-          this.groupsCopy = this.groups.filter((item) => {
-            if (!!~item.name.indexOf(input) || !!~item.name.toLowerCase().indexOf(input.toLowerCase())) {
-              return true
-            }
-          })
-        } else {
-          this.groupsCopy = this.groups;
-        }
+        formFieldsCopy: this.formFields,
       }
     }
   }

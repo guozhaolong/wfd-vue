@@ -13,7 +13,7 @@ https://zengqiu.github.io/wfd-vue/
 ```
 <template>
   <div id="app">
-    <wfd-vue ref="wfd" :data="demoData" :process-data="processData" :height="600" :users="candidateUsers" :groups="candidateGroups" :lang="lang" />
+    <wfd-vue ref="wfd" :data="demoData" :process-data="processData" :height="600" :users="candidateUsers" :groups="candidateGroups" :lang="lang" :forms="forms" />
   </div>
 </template>
 
@@ -31,6 +31,33 @@ export default {
       processData: {...},
       candidateUsers: [...],
       candidateGroups: [...],
+      forms: [
+        {
+          "id": 1,
+          "name": "表单一",
+            "fields": [
+            {
+              "id": "hello",
+              "name": "你好"
+            }, {
+              "id": "rate",
+              "name": "评分"
+            }, {
+              "id": "created",
+              "name": "创建时间"
+            }
+          ]
+        }, {
+          "id": 2,
+          "name": "表单一",
+          "fields": [
+            {
+              "id": "radio",
+              "name": "单选框组"
+            }
+          ]
+        }
+      ]
     }
   }
 }
@@ -52,9 +79,8 @@ export default {
 
 ### 方法
 
-* save(): 调用this.$refs['wfd'].graph.save()生成json
-* saveXML(): 调用this.$refs['wfd'].graph.saveXML(createFile)生成Flowable XML，createFile参数是否同时生成xml文件，默认为true
-* saveImg(): 调用this.$refs['wfd'].graph.saveImg(createFile)生成图片，createFile参数表示是否生成图片文件，默认为true，该函数返回值为图片base64
+* save(): 调用 `this.$refs['wfd'].graph.save()` 生成 JSON。
+* saveImg(): 调用 `this.$refs['wfd'].graph.saveImg(createFile)` 生成图片，`createFile` 参数表示是否生成图片文件，默认为 `true`，该函数返回值为图片 Base64。
 
 ## Run Example
 

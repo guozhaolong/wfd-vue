@@ -1,6 +1,6 @@
 <template>
     <div class="detailPanel" :style="{'height':height+'px'}">
-        <UserTaskDetail v-if="model.clazz === 'userTask'" :model="model" :onChange="onChange" :readOnly="readOnly" :users="users" :groups="groups" />
+        <UserTaskDetail v-if="model.clazz === 'userTask'" :model="model" :onChange="onChange" :readOnly="readOnly" :users="users" :groups="groups" :formFields="formFields" />
         <ScriptTaskDetail v-else-if="model.clazz === 'scriptTask'" :model="model" :onChange="onChange" :readOnly="readOnly" />
         <JavaTaskDetail v-else-if="model.clazz === 'javaTask'" :model="model" :onChange="onChange" :readOnly="readOnly" />
         <ReceiveTaskDetail v-else-if="model.clazz === 'receiveTask'" :model="model" :onChange="onChange" :readOnly="readOnly" />
@@ -12,7 +12,7 @@
         <FlowDetail v-else-if="model.clazz === 'flow'" :model="model" :onChange="onChange" :readOnly="readOnly" />
         <StartEventDetail v-else-if="model.clazz === 'start'" :model="model" :onChange="onChange" :readOnly="readOnly" />
         <EndEventDetail v-else-if="model.clazz === 'end'" :model="model" :onChange="onChange" :readOnly="readOnly" />
-        <ProcessDetail v-else-if="model.clazz === 'process'" :model="model" :onChange="onChange" :readOnly="readOnly" />
+        <ProcessDetail v-else-if="model.clazz === 'process'" :model="model" :onChange="onChange" :readOnly="readOnly" :forms="forms" />
         <CallActivityDetail v-else-if="model.clazz === 'callActivity'" :model="model" :onChange="onChange" :readOnly="readOnly" />
     </div>
 </template>
@@ -63,6 +63,14 @@
         default: ()=>([]),
       },
       groups: {
+        type: Array,
+        default: ()=>([]),
+      },
+      forms: {
+        type: Array,
+        default: ()=>([]),
+      },
+      formFields: {
         type: Array,
         default: ()=>([]),
       },

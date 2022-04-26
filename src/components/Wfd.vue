@@ -11,6 +11,8 @@
                    :readOnly="mode !== 'edit'"
                    :users="users"
                    :groups="groups"
+                   :forms="forms"
+                   :formFields="formFields"
                    :signalDefs="processModel.signalDefs"
                    :messageDefs="processModel.messageDefs"
                    :onChange="(key,val)=>{onItemCfgChange(key,val)}" />
@@ -28,9 +30,9 @@
   import ItemPanel from '../components/ItemPanel'
   import DetailPanel from '../components/DetailPanel'
   import i18n from '../locales'
-  import {exportXML,exportImg} from "../util/bpmn"
   import registerShape from '../shape'
   import registerBehavior from '../behavior'
+  import {exportImg} from '../util/export'
   registerShape(G6);
   registerBehavior(G6);
   export default {
@@ -71,6 +73,7 @@
         default: () => ({
           id: '',
           name: '',
+          form: '',
           clazz: 'process',
           dataObjs: [],
           signalDefs: [],
@@ -82,6 +85,10 @@
         default: () => ([])
       },
       groups: {
+        type: Array,
+        default: () => ([])
+      },
+      forms: {
         type: Array,
         default: () => ([])
       }
@@ -151,6 +158,11 @@
         });
       },
       onItemCfgChange(key,value){
+        // 流程表单切换时动态获取表单字段
+        if (key === 'form') {
+          this.$emit('get-form-fields', value)
+        }
+
         const items = this.graph.get('selectedItems');
         if(items && items.length > 0){
           const item = this.graph.findById(items[0]);
@@ -169,6 +181,55 @@
           this.processModel = canvasModel;
         }
       },
+      async validate() {
+        // 验证表单
+        let valid = true
+        if (!this.forms.some(form => {return form.id === this.processModel.form})) {
+          await this.$message({
+            message: '流程表单选择不正确',
+            type: 'error'
+          })
+          valid = false
+        }
+
+        // 验证节点
+        for (let node of this.graph.save().nodes) {
+          if (node.clazz === 'userTask') {
+            // 验证表单字段
+            const formFieldIds = this.formFields.map(field => field.id)
+            if (node.readonlyFormFields && !formFieldIds.some(id => node.readonlyFormFields.includes(id))) {
+              await this.$message({
+                message: `${node.label}的只读表单字段选择不正确`,
+                type: 'error'
+              })
+              valid = false
+            }
+            if (node.hiddenFormFields && !formFieldIds.some(id => node.hiddenFormFields.includes(id))) {
+              await this.$message({
+                message: `${node.label}的隐藏表单字段选择不正确`,
+                type: 'error'
+              })
+              valid = false
+            }
+
+            // 验证用户和组
+            const userIds = this.users.map(user => user.id)
+            const groupIds = this.groups.map(group => group.id)
+            const assignTitles = {assignee: '受理人', person: '候选人', persongroup: '候选组'}
+            if ((['assignee', 'person'].indexOf(node.assignType) !== -1 && !userIds.some(id => node.assignValue.includes(id))) ||
+                (node.assignType === 'persongroup' && !groupIds.some(id => node.assignValue.includes(id)))) {
+              await this.$message({
+                message: `${node.label}的${assignTitles[node.assignType]}选择不正确`,
+                type: 'error'
+              })
+              valid = false
+            }
+          }
+        }
+        return new Promise((resolve, reject) => {
+          valid ? resolve(valid) : reject(valid)
+        })
+      }
     },
     destroyed(){
       window.removeEventListener("resize", this.resizeFunc);
@@ -201,7 +262,6 @@
           shape: 'flow-polyline-round',
         },
       });
-      this.graph.saveXML = (createFile = true) => exportXML(this.graph.save(),this.processModel,createFile);
       this.graph.saveImg = (createFile = true) => exportImg(this.$refs['canvas'],this.processModel.name,createFile);
       if(this.isView)
         this.graph.setMode('view');
@@ -216,6 +276,12 @@
     },
     created() {
       this.selectedModel = this.processModel
+    },
+    computed: {
+      formFields: function () {
+        const form = this.processModel.form ? this.forms.filter(form => form.id === this.processModel.form)[0] : undefined
+        return (form && form.fields) ? form.fields : []
+      }
     }
   };
 </script>

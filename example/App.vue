@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <el-button size="small" style="float:right;margin-top:8px;margin-right:8px;" @click="()=>{this.$refs['wfd'].graph.saveXML()}">导出XML</el-button>
     <el-button size="small" style="float:right;margin-top:8px;margin-right:8px;" @click="()=>{this.$refs['wfd'].graph.saveImg()}">导出图片</el-button>
     <el-button size="small" style="float:right;margin-top:8px;" @click="()=>{this.modalVisible=true}">查看流程图</el-button>
-    <wfd-vue ref="wfd" :data="demoData" :height="600" :users="candidateUsers" :groups="candidateGroups" :lang="lang" />
+    <wfd-vue ref="wfd" :data="demoData" :height="600" :users="candidateUsers" :groups="candidateGroups" :lang="lang" :forms="forms" />
     <el-dialog title="查看流程图" :visible.sync="modalVisible" width="60%">
         <wfd-vue ref="wfd" :data="demoData1" :height="300" isView />
     </el-dialog>
@@ -63,6 +62,33 @@ export default {
       },
       candidateUsers: [{id:'1',name:'Tom'},{id:'2',name:'Steven'},{id:'3',name:'Andy'}],
       candidateGroups: [{id:'1',name:'Manager'},{id:'2',name:'Security'},{id:'3',name:'OA'}],
+      forms: [
+        {
+          "id": 1,
+          "name": "表单一",
+          "fields": [
+            {
+              "id": "hello",
+              "name": "你好"
+            }, {
+              "id": "rate",
+              "name": "评分"
+            }, {
+              "id": "created",
+              "name": "创建时间"
+            }
+          ]
+        }, {
+          "id": 2,
+          "name": "表单一",
+          "fields": [
+            {
+              "id": "radio",
+              "name": "单选框组"
+            }
+          ]
+        }
+      ]
     }
   },
   mounted() {
