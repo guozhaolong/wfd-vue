@@ -1,14 +1,14 @@
 <template>
     <div :data-clazz="model.clazz">
-        <div class="panelTitle">{{i18n['javaTask']}}</div>
+        <div class="panelTitle">{{i18n['serviceTask']}}</div>
         <div class="panelBody">
             <DefaultDetail :model="model" :onChange="onChange" :readOnly="readOnly" />
             <div class="panelRow">
-                <div>{{i18n['javaTask.javaClass']}}：</div>
+                <div>{{i18n['serviceTask.class']}}：</div>
                 <el-input style="width:90%; font-size:12px"
                           :disabled="readOnly"
-                          :value="model.javaClass"
-                          @input="(value) => {onChange('javaClass', value)}" />
+                          :value="model.class"
+                          @input="(value) => {onChange('class', value)}" />
             </div>
         </div>
     </div>

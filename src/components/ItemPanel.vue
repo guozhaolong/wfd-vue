@@ -22,9 +22,9 @@
                 <img :data-item="scriptTaskData"
                      :src="require('../assets/flow/script-task.svg')" style="width:80px;height:44px" />
                 <div>{{i18n['scriptTask']}}</div>
-                <img :data-item="javaTaskData"
-                     :src="require('../assets/flow/java-task.svg')" style="width:80px;height:44px" />
-                <div>{{i18n['javaTask']}}</div>
+                <img :data-item="serviceTaskData"
+                     :src="require('../assets/flow/service-task.svg')" style="width:80px;height:44px" />
+                <div>{{i18n['serviceTask']}}</div>
                 <img :data-item="mailTaskData"
                      :src="require('../assets/flow/mail-task.svg')" style="width:80px;height:44px" />
                 <div>{{i18n['mailTask']}}</div>
@@ -79,7 +79,7 @@
         activeNames: [],
         userTaskData: "{clazz:'userTask',size:'80*44',label:'"+this.i18n['userTask']+"'}",
         scriptTaskData: "{clazz:'scriptTask',size:'80*44',label:'"+this.i18n['scriptTask']+"'}",
-        javaTaskData: "{clazz:'javaTask',size:'80*44',label:'"+this.i18n['javaTask']+"'}",
+        serviceTaskData: "{clazz:'serviceTask',size:'80*44',label:'"+this.i18n['serviceTask']+"'}",
         mailTaskData: "{clazz:'mailTask',size:'80*44',label:'"+this.i18n['mailTask']+"'}",
         receiveTaskData: "{clazz:'receiveTask',size:'80*44',label:'"+this.i18n['receiveTask']+"'}",
         callActivityData: "{clazz:'callActivity',size:'80*44',label:'"+this.i18n['callActivity']+"'}",

@@ -12,7 +12,7 @@ export function getShapeName(clazz) {
     case 'userTask': return 'user-task-node';
     case 'scriptTask': return 'script-task-node';
     case 'mailTask': return 'mail-task-node';
-    case 'javaTask': return 'java-task-node';
+    case 'serviceTask': return 'service-task-node';
     case 'receiveTask': return 'receive-task-node';
     case 'timerCatch': return 'timer-catch-node';
     case 'messageCatch': return 'message-catch-node';
