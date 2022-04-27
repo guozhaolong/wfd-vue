@@ -9,48 +9,47 @@
                            :placeholder="i18n['userTask.assignType.placeholder']"
                            :value="model.assignType"
                            :disabled="readOnly"
-                           @change="(e) => { onChange('assignValue', []);onChange('assignType', e) }">
+                           @change="(e) => { onChange('assignType', e) }">
                     <el-option key="assignee" value="assignee" :label="i18n['userTask.assignType.assignee']"/>
-                    <el-option key="person" value="person" :label="i18n['userTask.assignType.person']"/>
-                    <el-option key="persongroup" value="persongroup" :label="i18n['userTask.assignType.persongroup']"/>
+                    <el-option key="candidate" value="candidate" :label="i18n['userTask.assignType.candidate']"/>
                 </el-select>
             </div>
             <div v-if="model.assignType === 'assignee'" class="panelRow">
-                <div>{{i18n['userTask.assignType.assignee.title']}}：</div>
+                <div>{{i18n['userTask.assignee']}}：</div>
                 <el-select style="width:90%; font-size:12px"
-                           :placeholder="i18n['userTask.assignType.assignee.placeholder']"
+                           :placeholder="i18n['userTask.assignee.placeholder']"
                            :disabled="readOnly"
-                           :value="model.assignValue"
-                           :multiple="true"
-                           :multiple-limit="1"
+                           :value="model.assignee"
                            :filterable="true"
-                           @change="(e) => onChange('assignValue', e)">
+                           @change="(e) => onChange('assignee', e)">
                     <el-option v-for="user in usersCopy" :key="user.id" :label="user.name" :value="user.id" />
                 </el-select>
             </div>
-            <div v-if="model.assignType === 'person'" class="panelRow">
-                <div>{{i18n['userTask.assignType.person.title']}}：</div>
+            <div v-else-if="model.assignType === 'candidate'">
+              <div class="panelRow">
+                <div>{{i18n['userTask.candidateUsers']}}：</div>
                 <el-select style="width:90%; font-size:12px"
-                           :placeholder="i18n['userTask.assignType.person.placeholder']"
+                           :placeholder="i18n['userTask.candidateUsers.placeholder']"
                            :disabled="readOnly"
-                           :value="model.assignValue"
+                           :value="model.candidateUsers"
                            :multiple="true"
                            :filterable="true"
-                           @change="(e) => onChange('assignValue', e)">
-                    <el-option v-for="user in usersCopy" :key="user.id" :label="user.name" :value="user.id" />
+                           @change="(e) => onChange('candidateUsers', e)">
+                  <el-option v-for="user in usersCopy" :key="user.id" :label="user.name" :value="user.id" />
                 </el-select>
-            </div>
-            <div v-else-if="model.assignType === 'persongroup'" class="panelRow">
-                <div>{{i18n['userTask.assignType.persongroup.title']}}：</div>
+              </div>
+              <div class="panelRow">
+                <div>{{i18n['userTask.candidateGroups']}}：</div>
                 <el-select style="width:90%; font-size:12px"
-                           :placeholder="i18n['userTask.assignType.persongroup.placeholder']"
-                           :value="model.assignValue"
+                           :placeholder="i18n['userTask.candidateGroups.placeholder']"
+                           :value="model.candidateGroups"
                            :disabled="readOnly"
                            :multiple="true"
                            :filterable="true"
-                           @change="(e) => onChange('assignValue', e)">
-                    <el-option v-for="group in groupsCopy" :key="group.id" :label="group.name" :value="group.id" />
+                           @change="(e) => onChange('candidateGroups', e)">
+                  <el-option v-for="group in groupsCopy" :key="group.id" :label="group.name" :value="group.id" />
                 </el-select>
+              </div>
             </div>
             <div class="panelRow">
                 <div style="display:inline">{{i18n['timeLimit']}}：</div>
@@ -74,7 +73,7 @@
                 </el-select>
             </div>
             <div class="panelRow">
-              <div>{{i18n['userTask.readonlyFormFields']}}：</div>
+              <div>{{i18n['readonlyFormFields']}}：</div>
               <el-select style="width:90%; font-size:12px"
                          :disabled="readOnly"
                          :value="model.readonlyFormFields"
@@ -85,7 +84,7 @@
               </el-select>
             </div>
             <div class="panelRow">
-              <div>{{i18n['userTask.hiddenFormFields']}}：</div>
+              <div>{{i18n['hiddenFormFields']}}：</div>
               <el-select style="width:90%; font-size:12px"
                          :disabled="readOnly"
                          :value="model.hiddenFormFields"

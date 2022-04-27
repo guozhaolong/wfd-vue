@@ -158,11 +158,6 @@
         });
       },
       onItemCfgChange(key,value){
-        // 流程表单切换时动态获取表单字段
-        if (key === 'form') {
-          this.$emit('get-form-fields', value)
-        }
-
         const items = this.graph.get('selectedItems');
         if(items && items.length > 0){
           const item = this.graph.findById(items[0]);

@@ -23,8 +23,33 @@
                          :value="model.form"
                          :filterable="true"
                          clearable
-                         @change="(e) => onChange('form', e)">
+                         @change="(e) => {this.$emit('get-form-fields', e); onChange('form', e)}">
+                <!-- get-form-fields 用于流程表单切换时动态获取表单字段 -->
                 <el-option v-for="form in formsCopy" :key="form.id" :label="form.name" :value="form.id" />
+              </el-select>
+            </div>
+            <div class="panelRow">
+              <div>{{i18n['process.starterUsers']}}：</div>
+              <el-select style="width:90%; font-size:12px"
+                         :placeholder="i18n['process.starterUsers.placeholder']"
+                         :disabled="readOnly"
+                         :value="model.starterUsers"
+                         :multiple="true"
+                         :filterable="true"
+                         @change="(e) => onChange('starterUsers', e)">
+                <el-option v-for="user in usersCopy" :key="user.id" :label="user.name" :value="user.id" />
+              </el-select>
+            </div>
+            <div class="panelRow">
+              <div>{{i18n['process.starterGroups']}}：</div>
+              <el-select style="width:90%; font-size:12px"
+                         :placeholder="i18n['process.starterGroups.placeholder']"
+                         :value="model.starterGroups"
+                         :disabled="readOnly"
+                         :multiple="true"
+                         :filterable="true"
+                         @change="(e) => onChange('starterGroups', e)">
+                <el-option v-for="group in groupsCopy" :key="group.id" :label="group.name" :value="group.id" />
               </el-select>
             </div>
             <div class="panelRow">
@@ -114,6 +139,14 @@
         type: Array,
         default: ()=>([]),
       },
+      users: {
+        type: Array,
+        default: ()=>([]),
+      },
+      groups: {
+        type: Array,
+        default: ()=>([]),
+      },
       onChange: {
         type: Function,
         default: ()=>{}
@@ -129,7 +162,8 @@
     data() {
       return {
         formsCopy: this.forms,
-
+        usersCopy: this.users,
+        groupsCopy: this.groups,
         table: '',
         dialogVisible: false,
         dataObjsColumns: [

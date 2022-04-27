@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <el-button size="small" style="float:right;margin-top:8px;margin-right:8px;" @click="()=>{this.$refs['wfd'].graph.saveImg()}">导出图片</el-button>
+    <el-button size="small" style="float:right;margin-top:8px;margin-right:8px;" @click="printJSON">打印 JSON</el-button>
     <el-button size="small" style="float:right;margin-top:8px;" @click="()=>{this.modalVisible=true}">查看流程图</el-button>
     <wfd-vue ref="wfd" :data="demoData" :height="600" :users="candidateUsers" :groups="candidateGroups" :lang="lang" :forms="forms" />
     <el-dialog title="查看流程图" :visible.sync="modalVisible" width="60%">
@@ -92,6 +93,15 @@ export default {
     }
   },
   mounted() {
+  },
+  methods: {
+    printJSON () {
+      let content = {
+        data: this.$refs['wfd'].graph.save(),
+        processData: this.$refs['wfd'].processModel
+      }
+      console.log(content)
+    }
   }
 }
 </script>
