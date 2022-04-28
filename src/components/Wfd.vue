@@ -177,6 +177,8 @@
         }
       },
       async validate() {
+        // 后续此处部分验证需要放置各组件详情配置里
+        // 流程信息验证
         // 验证表单
         let valid = true
         if (!this.forms.some(form => {return form.id === this.processModel.form})) {
@@ -186,38 +188,123 @@
           })
           valid = false
         }
+        // 验证流程标识
+        if (!this.processModel.id) {
+          await this.$message({
+            message: '流程标识必填',
+            type: 'error'
+          })
+          valid = false
+        }
+        // 验证流程名称
+        if (!this.processModel.name) {
+          await this.$message({
+            message: '流程名称必填',
+            type: 'error'
+          })
+          valid = false
+        }
+        const userIds = this.users.map(user => user.id)
+        const groupIds = this.groups.map(group => group.id)
+        if ((!this.processModel.starterUsers || this.processModel.starterUsers.length === 0) && (!this.processModel.starterGroups || this.processModel.starterGroups.length === 0)) {
+          await this.$message({
+            message: '至少需要设置一个流程发起用户或流程发起组',
+            type: 'error'
+          })
+          valid = false
+        }
+        // 验证发起人
+        if (this.processModel.starterUsers && this.processModel.starterUsers.length !== 0 && !userIds.some(id => this.processModel.starterUsers.includes(id))) {
+          await this.$message({
+            message: '流程发起用户选择不正确',
+            type: 'error'
+          })
+          valid = false
+        }
+        // 验证发起组
+        if (this.processModel.starterGroups && this.processModel.starterGroups.length !== 0 && !groupIds.some(id => this.processModel.starterGroups.includes(id))) {
+          await this.$message({
+            message: '流程发起组选择不正确',
+            type: 'error'
+          })
+          valid = false
+        }
+        // 验证时间和单位
+        if ((this.processModel.timeLimit && !this.processModel.timeLimitUnit) || (!this.processModel.timeLimit && this.processModel.timeLimitUnit)) {
+          await this.$message({
+            message: '时限和单位需同时填写（或均不填）',
+            type: 'error'
+          })
+          valid = false
+        }
 
         // 验证节点
         for (let node of this.graph.save().nodes) {
-          if (node.clazz === 'userTask') {
+          if (['start', 'userTask'].includes(node.clazz)) {
             // 验证表单字段
             const formFieldIds = this.formFields.map(field => field.id)
-            if (node.readonlyFormFields && !formFieldIds.some(id => node.readonlyFormFields.includes(id))) {
+            if (node.readonlyFormFields && node.readonlyFormFields.length !== 0 && !formFieldIds.some(id => node.readonlyFormFields.includes(id))) {
               await this.$message({
-                message: `${node.label}的只读表单字段选择不正确`,
+                message: `【${node.label}】节点的只读表单字段选择不正确`,
                 type: 'error'
               })
               valid = false
             }
-            if (node.hiddenFormFields && !formFieldIds.some(id => node.hiddenFormFields.includes(id))) {
+            if (node.hiddenFormFields && node.hiddenFormFields.length !== 0 && !formFieldIds.some(id => node.hiddenFormFields.includes(id))) {
               await this.$message({
-                message: `${node.label}的隐藏表单字段选择不正确`,
+                message: `【${node.label}】节点的隐藏表单字段选择不正确`,
                 type: 'error'
               })
               valid = false
             }
+            if (node.readonlyFormFields && node.hiddenFormFields && node.readonlyFormFields.some(id => node.hiddenFormFields.includes(id))) {
+              await this.$message({
+                message: `【${node.label}】节点的只读表单字段和隐藏表单字段不能有重复字段`,
+                type: 'error'
+              })
+              valid = false
+            }
+          }
 
-            // 验证用户和组
-            const userIds = this.users.map(user => user.id)
-            const groupIds = this.groups.map(group => group.id)
-            const assignTitles = {assignee: '受理人', person: '候选人', persongroup: '候选组'}
-            if ((['assignee', 'person'].indexOf(node.assignType) !== -1 && !userIds.some(id => node.assignValue.includes(id))) ||
-                (node.assignType === 'persongroup' && !groupIds.some(id => node.assignValue.includes(id)))) {
+          if (node.clazz === 'userTask') {
+            // 验证指派类型
+            if (!['assignee', 'candidate'].includes(node.assignType)) {
               await this.$message({
-                message: `${node.label}的${assignTitles[node.assignType]}选择不正确`,
+                message: `【${node.label}】节点的指派类型选择不正确`,
                 type: 'error'
               })
               valid = false
+            }
+            // 验证用户和组
+            if (node.assignType === 'assignee' && (!node.assignee || !userIds.some(id => id === node.assignee))) {
+              await this.$message({
+                message: `【${node.label}】节点的受理人选择不正确`,
+                type: 'error'
+              })
+              valid = false
+            }
+            if (node.assignType === 'candidate') {
+              if ((!node.candidateUsers || node.candidateUsers.length === 0) && (!node.candidateGroups || node.candidateGroups.length === 0)) {
+                await this.$message({
+                  message: `【${node.label}】节点至少需要设置一个候选用户或候选组`,
+                  type: 'error'
+                })
+                valid = false
+              }
+              if(node.candidateUsers && node.candidateUsers.length !== 0 && !userIds.some(id => node.candidateUsers.includes(id))) {
+                await this.$message({
+                  message: `【${node.label}】节点的候选用户选择不正确`,
+                  type: 'error'
+                })
+                valid = false
+              }
+              if (node.candidateGroups && node.candidateGroups.length !== 0 && !groupIds.some(id => node.candidateGroups.includes(id))) {
+                await this.$message({
+                  message: `【${node.label}】节点的候选组选择不正确`,
+                  type: 'error'
+                })
+                valid = false
+              }
             }
           }
         }

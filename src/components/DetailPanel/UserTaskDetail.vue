@@ -9,7 +9,7 @@
                            :placeholder="i18n['userTask.assignType.placeholder']"
                            :value="model.assignType"
                            :disabled="readOnly"
-                           @change="(e) => { onChange('assignType', e) }">
+                           @change="(e) => { onChange('assignee', undefined); onChange('candidateUsers', undefined); onChange('candidateGroups', undefined); onChange('assignType', e) }">
                     <el-option key="assignee" value="assignee" :label="i18n['userTask.assignType.assignee']"/>
                     <el-option key="candidate" value="candidate" :label="i18n['userTask.assignType.candidate']"/>
                 </el-select>

@@ -5,7 +5,7 @@
     <el-button size="small" style="float:right;margin-top:8px;" @click="()=>{this.modalVisible=true}">查看流程图</el-button>
     <wfd-vue ref="wfd" :data="demoData" :height="600" :users="candidateUsers" :groups="candidateGroups" :lang="lang" :forms="forms" />
     <el-dialog title="查看流程图" :visible.sync="modalVisible" width="60%">
-        <wfd-vue ref="wfd" :data="demoData1" :height="300" isView />
+        <wfd-vue ref="wfd2" :data="demoData1" :height="300" isView />
     </el-dialog>
   </div>
 </template>
@@ -96,11 +96,13 @@ export default {
   },
   methods: {
     printJSON () {
-      let content = {
-        data: this.$refs['wfd'].graph.save(),
-        processData: this.$refs['wfd'].processModel
-      }
-      console.log(content)
+      this.$refs['wfd'].validate().then(() => {
+        let content = {
+          data: this.$refs['wfd'].graph.save(),
+          processData: this.$refs['wfd'].processModel
+        }
+        console.log(content)
+      })
     }
   }
 }
