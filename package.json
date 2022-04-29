@@ -38,8 +38,8 @@
   },
   "dependencies": {
     "@antv/dom-util": "2.0.2",
-    "@antv/g-canvas": "^0.4.12",
-    "@antv/g6": "3.5.2",
+    "@antv/g-canvas": "0.5.5",
+    "@antv/g6": "3.7.3",
     "@antv/matrix-util": "2.0.7",
     "@antv/util": "~2.0.9",
     "ele-table-editor": "^0.5.0",

@@ -125,7 +125,7 @@
           return {
             nodes: data.nodes.map(node => {
               return {
-                shape: getShapeName(node.clazz),
+                type: getShapeName(node.clazz),
                 ...node,
               }
             }),
@@ -341,7 +341,7 @@
             'dragPanelItemAddNode','clickSelected','deleteItem','itemAlign'],
         },
         defaultEdge: {
-          shape: 'flow-polyline-round',
+          type: 'flow-polyline-round',
         },
       });
       this.graph.saveImg = (createFile = true) => exportImg(this.$refs['canvas'],this.processModel.name,createFile);
