@@ -1,6 +1,6 @@
 {
   "name": "wfd-vue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "a workflow designer base on @antv/g6",
   "main": "dist/wfd-vue.umd.min.js",
@@ -15,14 +15,13 @@
     "dist"
   ],
   "authors": {
-    "name": "guozhaolong",
-    "email": "guozhaolong@gmail.com"
+    "name": "zengqiu"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/guozhaolong/wfd-vue/issues"
+    "url": "https://github.com/zengqiu/wfd-vue/issues"
   },
-  "homepage": "https://github.com/guozhaolong/wfd-vue#readme",
+  "homepage": "https://github.com/zengqiu/wfd-vue#readme",
   "directories": {
     "example": "example"
   },
@@ -32,10 +31,10 @@
     "diagram",
     "g6"
   ],
-  "author": "stevenkwok",
+  "author": "zengqiu",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/guozhaolong/wfd-vue.git"
+    "url": "git+https://github.com/zengqiu/wfd-vue.git"
   },
   "dependencies": {
     "@antv/dom-util": "2.0.2",
