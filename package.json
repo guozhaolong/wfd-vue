@@ -1,6 +1,6 @@
 {
   "name": "wfd-vue",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "description": "a workflow designer base on @antv/g6",
   "main": "dist/wfd-vue.umd.min.js",

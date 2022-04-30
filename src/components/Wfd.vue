@@ -334,6 +334,7 @@
         container: this.$refs['canvas'],
         height: this.height,
         width: width,
+        fitView: true,
         modes: {
           default: ['drag-canvas', 'clickSelected'],
           view: [ ],

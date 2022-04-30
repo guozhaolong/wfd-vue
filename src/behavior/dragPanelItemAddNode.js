@@ -46,9 +46,7 @@ export default function(G6){
     onMouseUp(e){
       if (this.graph.get('addNodeDragging')) {
         const p = this.graph.getPointByClient(e.clientX, e.clientY);
-        if (p.x > 0 && p.y > 0) {
-          this._addNode(p);
-        }
+        this._addNode(p);
       }
     },
     onMouseLeave(e){
