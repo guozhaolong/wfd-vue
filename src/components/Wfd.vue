@@ -337,7 +337,7 @@
         modes: {
           default: ['drag-canvas', 'clickSelected'],
           view: [ ],
-          edit: [ 'drag-canvas', 'hoverNodeActived','hoverAnchorActived','dragNode','dragEdge',
+          edit: [ 'drag-canvas', 'zoom-canvas', 'drag-node', 'hoverNodeActived','hoverAnchorActived','dragEdge',
             'dragPanelItemAddNode','clickSelected','deleteItem','itemAlign'],
         },
         defaultEdge: {
