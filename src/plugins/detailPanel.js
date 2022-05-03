@@ -36,15 +36,15 @@ class DetailPanel {
     const parentNode = this.get('container');
     const selectedItems = graph.get('selectedItems');
     let selectedItem = null;
-    let clazz = null;
+    let type = null;
     if(selectedItems && selectedItems.length > 0){
       selectedItem = graph.findById(selectedItems[0]);
-      clazz = selectedItem.getModel().clazz;
+      type = selectedItem.getModel().type;
     }
     each(parentNode.children,(child,i)=>{
-      if(child.hasAttribute('data-clazz')){
-        const clazzName = child.getAttribute('data-clazz');
-        if(clazz && clazz === clazzName){
+      if(child.hasAttribute('data-type')){
+        const typeName = child.getAttribute('data-type');
+        if(type && type === typeName){
           modifyCSS(child,{
             display: 'inline'
           });

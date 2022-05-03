@@ -1,5 +1,5 @@
 <template>
-    <div :data-clazz="model.clazz">
+    <div :data-type="model.type">
         <div class="panelTitle">{{i18n['endEvent']}}</div>
         <div class="panelBody">
             <DefaultDetail :model="model" :onChange="onChange" :readOnly="readOnly" />

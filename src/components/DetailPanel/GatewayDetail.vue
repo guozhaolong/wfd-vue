@@ -1,7 +1,7 @@
 <template>
-    <div :data-clazz="model.clazz">
-        <div class="panelTitle">{{model.clazz === 'exclusiveGateway' || model.clazz === 'gateway' ? i18n['exclusiveGateway']
-            : model.clazz === 'parallelGateway' ? i18n['parallelGateway'] : i18n['inclusiveGateway']}}</div>
+    <div :data-type="model.type">
+        <div class="panelTitle">{{model.type === 'exclusive-gateway-node' || model.type === 'gateway-node' ? i18n['exclusiveGateway']
+            : model.type === 'parallel-gateway-node' ? i18n['parallelGateway'] : i18n['inclusiveGateway']}}</div>
         <div class="panelBody">
             <DefaultDetail :model="model" :onChange="onChange" :readOnly="readOnly" />
         </div>

@@ -1,5 +1,5 @@
 <template>
-    <div :data-clazz="model.clazz">
+    <div :data-type="model.type">
         <div class="panelTitle">{{i18n['process']}}</div>
         <div class="panelBody">
             <div class="panelRow">

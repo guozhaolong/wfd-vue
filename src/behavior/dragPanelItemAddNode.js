@@ -1,5 +1,4 @@
 import editorStyle from "../util/defaultStyle";
-import { getShapeName } from '../util/clazz';
 
 export default function(G6){
   G6.registerBehavior('dragPanelItemAddNode', {
@@ -67,12 +66,10 @@ export default function(G6){
     _addNode(p){
       if (this.graph.get('addNodeDragging')) {
         const addModel = this.graph.get('addModel');
-        const { clazz = 'userTask' } = addModel;
-        //type、shape属性同时存在即兼容之前版本的数据，又兼容g6的升级
-        addModel.type = getShapeName(clazz);
-        addModel.shape = getShapeName(clazz);
+        const { type = 'user-task-node' } = addModel;
+        addModel.type = type;
         const timestamp = new Date().getTime();
-        const id = clazz + timestamp;
+        const id = type + '-' + timestamp;
         const x = p.x;
         const y = p.y;
         if (this.graph.executeCommand) {

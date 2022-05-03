@@ -15,8 +15,8 @@ export default function(G6){
       }
     },
     onNodeEnter(e){
-      const clazz = e.item.getModel().clazz;
-      if(clazz !== 'endEvent' && !this.graph.get('edgeDragging')){
+      const type = e.item.getModel().type;
+      if(type !== 'end-node' && !this.graph.get('edgeDragging')){
         this.graph.setItemState(e.item, 'show-anchor', true);
       }
     },

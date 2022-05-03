@@ -80,9 +80,9 @@ export default function (G6) {
     },
     dragEdgeBeforeShowAnchor(e) {
       this.graph.getNodes().forEach(node => {
-        if (node.getModel().clazz === 'start'
-          || node.getModel().clazz === 'timerStart'
-          || node.getModel().clazz === 'messageStart')
+        if (node.getModel().type === 'start-node'
+          || node.getModel().type === 'timer-start-node'
+          || node.getModel().type === 'message-start-node')
           return;
         const group = node.getContainer();
         group.showAnchor();
@@ -131,7 +131,6 @@ export default function (G6) {
         const timestamp = new Date().getTime();
         const addModel = {
           id: 'flow' + timestamp,
-          clazz: 'flow',
           source: this.origin.sourceNode.get('id'),
           target: this.origin.targetNode.get('id'),
           sourceAnchor: this.origin.sourceAnchor,

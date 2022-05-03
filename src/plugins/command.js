@@ -193,9 +193,9 @@ class Command{
         const addModel = this.pasteData.model;
         addModel.x && (addModel.x += 10);
         addModel.y && (addModel.y += 10);
-        const { clazz = 'userTask' } = addModel;
+        const { type = 'user-task-node' } = addModel;
         const timestamp = new Date().getTime();
-        const id = clazz + timestamp;
+        const id = type + '-' + timestamp;
         addModel.id = id;
         const item = graph.add(this.pasteData.type, addModel);
         item.toFront();
