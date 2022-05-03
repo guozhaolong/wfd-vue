@@ -1,10 +1,10 @@
 <template>
     <div :data-type="model.type">
-        <div class="panelTitle">{{i18n['sequenceFlow']}}</div>
+        <div class="panelTitle">{{i18n['Edge']}}</div>
         <div class="panelBody">
             <DefaultDetail :model="model" :onChange="onChange" :readOnly="readOnly" />
             <div class="panelRow">
-                <div>{{i18n['sequenceFlow.expression']}}：</div>
+                <div>{{i18n['Edge.expression']}}：</div>
                 <el-input style="width:90%; font-size:12px"
                           type="textarea"
                           :rows="4"
@@ -13,7 +13,7 @@
                           @input="(value) => {onChange('conditionExpression', value)}" />
             </div>
             <div class="panelRow">
-                <div>{{i18n['sequenceFlow.seq']}}：</div>
+                <div>{{i18n['Edge.seq']}}：</div>
                 <el-input style="width:90%; font-size:12px"
                           :disabled="readOnly"
                           :value="model.seq"
@@ -22,7 +22,7 @@
             <div class="panelRow">
                 <el-checkbox @change="(value) => onChange('reverse', value)"
                              :disabled="readOnly"
-                             :value="!!model.reverse">{{i18n['sequenceFlow.reverse']}}</el-checkbox>
+                             :value="!!model.reverse">{{i18n['Edge.reverse']}}</el-checkbox>
             </div>
         </div>
     </div>

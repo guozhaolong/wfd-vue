@@ -9,7 +9,7 @@
         <SignalEventDetail v-else-if="model.type === 'signal-start-node' || model.type === 'signal-catch-node'" :model="model" :onChange="onChange" :readOnly="readOnly" :signalDefs="signalDefs" />
         <MessageEventDetail v-else-if="model.type === 'message-start-node' || model.type === 'message-catch-node'" :model="model" :onChange="onChange" :readOnly="readOnly" :messageDefs="messageDefs" />
         <GatewayDetail v-else-if="model.type === 'gateway-node' || model.type === 'exclusive-gateway-node' || model.type === 'parallel-gateway-node' || model.type === 'inclusive-gateway-node'" :model="model" :onChange="onChange" :readOnly="readOnly" />
-        <FlowDetail v-else-if="model.type === 'edge'" :model="model" :onChange="onChange" :readOnly="readOnly" />
+        <EdgeDetail v-else-if="model.type === 'edge'" :model="model" :onChange="onChange" :readOnly="readOnly" />
         <StartEventDetail v-else-if="model.type === 'start-node'" :model="model" :onChange="onChange" :readOnly="readOnly" :formFields="formFields" />
         <EndEventDetail v-else-if="model.type === 'end-node'" :model="model" :onChange="onChange" :readOnly="readOnly" />
         <ProcessDetail v-else-if="model.type === 'process'" :model="model" :onChange="onChange" :readOnly="readOnly" :forms="forms" :users="users" :groups="groups" />
@@ -26,7 +26,7 @@
   import SignalEventDetail from "./SignalEventDetail"
   import MessageEventDetail from "./MessageEventDetail"
   import GatewayDetail from "./GatewayDetail"
-  import FlowDetail from "./FlowDetail"
+  import EdgeDetail from "./EdgeDetail"
   import StartEventDetail from "./StartEventDetail"
   import EndEventDetail from "./EndEventDetail"
   import ProcessDetail from "./ProcessDetail"
@@ -43,7 +43,7 @@
       SignalEventDetail,
       MessageEventDetail,
       GatewayDetail,
-      FlowDetail,
+      EdgeDetail,
       StartEventDetail,
       EndEventDetail,
       ProcessDetail,
