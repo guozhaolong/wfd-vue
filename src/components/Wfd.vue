@@ -341,7 +341,7 @@
             'dragPanelItemAddNode','clickSelected','deleteItem','itemAlign'],
         },
         defaultEdge: {
-          type: 'flow-polyline-round',
+          type: 'edge',
         },
       });
       this.graph.saveImg = (createFile = true) => exportImg(this.$refs['canvas'],this.processModel.name,createFile);

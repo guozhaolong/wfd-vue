@@ -10,7 +10,7 @@ const uniqBy = (arr,key)=>{
 };
 
 export default function(G6){
-  G6.registerEdge('flow-polyline-round', {
+  G6.registerEdge('edge', {
     options: {
       style: {
         ...editorStyle.edgeStyle

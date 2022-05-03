@@ -43,8 +43,7 @@ class DetailPanel {
     }
     each(parentNode.children,(child,i)=>{
       if(child.hasAttribute('data-type')){
-        const typeName = child.getAttribute('data-type');
-        if(type && type === typeName){
+        if(type && type === child.getAttribute('data-type')){
           modifyCSS(child,{
             display: 'inline'
           });
