@@ -25,9 +25,9 @@
                 <img :data-item="serviceTaskData"
                      :src="require('../assets/flow/service-task.svg')" style="width:80px;height:44px" />
                 <div>{{i18n['serviceTask']}}</div>
-                <img :data-item="mailTaskData"
-                     :src="require('../assets/flow/mail-task.svg')" style="width:80px;height:44px" />
-                <div>{{i18n['mailTask']}}</div>
+                <img :data-item="sendTaskData"
+                     :src="require('../assets/flow/send-task.svg')" style="width:80px;height:44px" />
+                <div>{{i18n['sendTask']}}</div>
                 <img :data-item="receiveTaskData"
                      :src="require('../assets/flow/receive-task.svg')" style="width:80px;height:44px" />
                 <div>{{i18n['receiveTask']}}</div>
@@ -86,7 +86,7 @@
         userTaskData: "{type:'user-task',size:'80*44',label:'"+this.i18n['userTask']+"'}",
         scriptTaskData: "{type:'script-task',size:'80*44',label:'"+this.i18n['scriptTask']+"'}",
         serviceTaskData: "{type:'service-task',size:'80*44',label:'"+this.i18n['serviceTask']+"'}",
-        mailTaskData: "{type:'mail-task',size:'80*44',label:'"+this.i18n['mailTask']+"'}",
+        sendTaskData: "{type:'send-task',size:'80*44',label:'"+this.i18n['sendTask']+"'}",
         receiveTaskData: "{type:'receive-task',size:'80*44',label:'"+this.i18n['receiveTask']+"'}",
         callActivityData: "{type:'call-activity',size:'80*44',label:'"+this.i18n['callActivity']+"'}",
 

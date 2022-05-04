@@ -4,7 +4,7 @@
         <ScriptTaskDetail v-else-if="model.type === 'script-task'" :model="model" :onChange="onChange" :readOnly="readOnly" />
         <ServiceTaskDetail v-else-if="model.type === 'service-task'" :model="model" :onChange="onChange" :readOnly="readOnly" />
         <ReceiveTaskDetail v-else-if="model.type === 'receive-task'" :model="model" :onChange="onChange" :readOnly="readOnly" />
-        <MailTaskDetail v-else-if="model.type === 'mail-task'" :model="model" :onChange="onChange" :readOnly="readOnly" />
+        <SendTaskDetail v-else-if="model.type === 'send-task'" :model="model" :onChange="onChange" :readOnly="readOnly" />
         <TimerEventDetail v-else-if="model.type === 'timer-start-event' || model.type === 'timer-catch-event'" :model="model" :onChange="onChange" :readOnly="readOnly" />
         <SignalEventDetail v-else-if="model.type === 'signal-start-event' || model.type === 'signal-catch-event'" :model="model" :onChange="onChange" :readOnly="readOnly" :signalDefs="signalDefs" />
         <MessageEventDetail v-else-if="model.type === 'message-start-event' || model.type === 'message-catch-event'" :model="model" :onChange="onChange" :readOnly="readOnly" :messageDefs="messageDefs" />
@@ -21,7 +21,7 @@
   import ServiceTaskDetail from "./ServiceTaskDetail"
   import ScriptTaskDetail from "./ScriptTaskDetail"
   import ReceiveTaskDetail from "./ReceiveTaskDetail"
-  import MailTaskDetail from "./MailTaskDetail"
+  import SendTaskDetail from "./SendTaskDetail"
   import TimerEventDetail from "./TimerEventDetail"
   import SignalEventDetail from "./SignalEventDetail"
   import MessageEventDetail from "./MessageEventDetail"
@@ -38,7 +38,7 @@
       ScriptTaskDetail,
       ServiceTaskDetail,
       ReceiveTaskDetail,
-      MailTaskDetail,
+      SendTaskDetail,
       TimerEventDetail,
       SignalEventDetail,
       MessageEventDetail,

@@ -387,9 +387,9 @@ export default function (G6) {
             }
         }),
     }, 'task');
-    G6.registerNode('mail-task', {
+    G6.registerNode('send-task', {
         options: G6.Util.deepMix({}, taskDefaultOptions, {
-            icon: require('../assets/icons/flow/icon_mail.svg'),
+            icon: require('../assets/icons/flow/icon_send.svg'),
             style: {
                 fill: '#F6FFED',
                 stroke: '#73D13D',
