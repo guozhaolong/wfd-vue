@@ -96,13 +96,13 @@ export default {
   },
   methods: {
     printJSON () {
-      // this.$refs['wfd'].validate().then(() => {
+      this.$refs['wfd'].validate().then(() => {
         let content = {
           data: this.$refs['wfd'].graph.save(),
           processData: this.$refs['wfd'].processModel
         }
         console.log(content)
-      // })
+      })
     }
   }
 }
