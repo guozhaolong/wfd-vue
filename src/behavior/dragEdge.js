@@ -80,9 +80,9 @@ export default function (G6) {
     },
     dragEdgeBeforeShowAnchor(e) {
       this.graph.getNodes().forEach(node => {
-        if (node.getModel().type === 'start-node'
-          || node.getModel().type === 'timer-start-node'
-          || node.getModel().type === 'message-start-node')
+        if (node.getModel().type === 'start-event'
+          || node.getModel().type === 'timer-start-event'
+          || node.getModel().type === 'message-start-event')
           return;
         const group = node.getContainer();
         group.showAnchor();

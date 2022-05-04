@@ -1,19 +1,19 @@
 <template>
     <div class="detailPanel" :style="{'height':height+'px'}">
-        <UserTaskDetail v-if="model.type === 'user-task-node'" :model="model" :onChange="onChange" :readOnly="readOnly" :users="users" :groups="groups" :formFields="formFields" />
-        <ScriptTaskDetail v-else-if="model.type === 'script-task-node'" :model="model" :onChange="onChange" :readOnly="readOnly" />
-        <ServiceTaskDetail v-else-if="model.type === 'service-task-node'" :model="model" :onChange="onChange" :readOnly="readOnly" />
-        <ReceiveTaskDetail v-else-if="model.type === 'receive-task-node'" :model="model" :onChange="onChange" :readOnly="readOnly" />
-        <MailTaskDetail v-else-if="model.type === 'mail-task-node'" :model="model" :onChange="onChange" :readOnly="readOnly" />
-        <TimerEventDetail v-else-if="model.type === 'timer-start-node' || model.type === 'timer-catch-node'" :model="model" :onChange="onChange" :readOnly="readOnly" />
-        <SignalEventDetail v-else-if="model.type === 'signal-start-node' || model.type === 'signal-catch-node'" :model="model" :onChange="onChange" :readOnly="readOnly" :signalDefs="signalDefs" />
-        <MessageEventDetail v-else-if="model.type === 'message-start-node' || model.type === 'message-catch-node'" :model="model" :onChange="onChange" :readOnly="readOnly" :messageDefs="messageDefs" />
-        <GatewayDetail v-else-if="model.type === 'gateway-node' || model.type === 'exclusive-gateway-node' || model.type === 'parallel-gateway-node' || model.type === 'inclusive-gateway-node'" :model="model" :onChange="onChange" :readOnly="readOnly" />
+        <UserTaskDetail v-if="model.type === 'user-task'" :model="model" :onChange="onChange" :readOnly="readOnly" :users="users" :groups="groups" :formFields="formFields" />
+        <ScriptTaskDetail v-else-if="model.type === 'script-task'" :model="model" :onChange="onChange" :readOnly="readOnly" />
+        <ServiceTaskDetail v-else-if="model.type === 'service-task'" :model="model" :onChange="onChange" :readOnly="readOnly" />
+        <ReceiveTaskDetail v-else-if="model.type === 'receive-task'" :model="model" :onChange="onChange" :readOnly="readOnly" />
+        <MailTaskDetail v-else-if="model.type === 'mail-task'" :model="model" :onChange="onChange" :readOnly="readOnly" />
+        <TimerEventDetail v-else-if="model.type === 'timer-start-event' || model.type === 'timer-catch-event'" :model="model" :onChange="onChange" :readOnly="readOnly" />
+        <SignalEventDetail v-else-if="model.type === 'signal-start-event' || model.type === 'signal-catch-event'" :model="model" :onChange="onChange" :readOnly="readOnly" :signalDefs="signalDefs" />
+        <MessageEventDetail v-else-if="model.type === 'message-start-event' || model.type === 'message-catch-event'" :model="model" :onChange="onChange" :readOnly="readOnly" :messageDefs="messageDefs" />
+        <GatewayDetail v-else-if="model.type === 'gateway' || model.type === 'exclusive-gateway' || model.type === 'parallel-gateway' || model.type === 'inclusive-gateway'" :model="model" :onChange="onChange" :readOnly="readOnly" />
         <EdgeDetail v-else-if="model.type === 'edge'" :model="model" :onChange="onChange" :readOnly="readOnly" />
-        <StartEventDetail v-else-if="model.type === 'start-node'" :model="model" :onChange="onChange" :readOnly="readOnly" :formFields="formFields" />
-        <EndEventDetail v-else-if="model.type === 'end-node'" :model="model" :onChange="onChange" :readOnly="readOnly" />
+        <StartEventDetail v-else-if="model.type === 'start-event'" :model="model" :onChange="onChange" :readOnly="readOnly" :formFields="formFields" />
+        <EndEventDetail v-else-if="model.type === 'end-event'" :model="model" :onChange="onChange" :readOnly="readOnly" />
         <ProcessDetail v-else-if="model.type === 'process'" :model="model" :onChange="onChange" :readOnly="readOnly" :forms="forms" :users="users" :groups="groups" />
-        <CallActivityDetail v-else-if="model.type === 'call-activity-node'" :model="model" :onChange="onChange" :readOnly="readOnly" />
+        <CallActivityDetail v-else-if="model.type === 'call-activity'" :model="model" :onChange="onChange" :readOnly="readOnly" />
     </div>
 </template>
 <script>

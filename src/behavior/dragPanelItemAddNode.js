@@ -66,7 +66,7 @@ export default function(G6){
     _addNode(p){
       if (this.graph.get('addNodeDragging')) {
         const addModel = this.graph.get('addModel');
-        const { type = 'user-task-node' } = addModel;
+        const { type = 'user-task' } = addModel;
         addModel.type = type;
         const timestamp = new Date().getTime();
         const id = type + '-' + timestamp;

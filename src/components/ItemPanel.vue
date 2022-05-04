@@ -2,16 +2,16 @@
     <div class="itemPanel" :style="{'height': height+'px'}">
         <el-collapse v-model="activeNames" >
             <el-collapse-item :title="i18n['start']" name="1">
-                <img data-item="{type:'start-node',size:'30*30',label:''}"
+                <img :data-item="startEventData"
                      :src="require('../assets/flow/start.svg')" style="width:42px;height:42px" />
                 <div>{{i18n['startEvent']}}</div>
-                <img data-item="{type:'timer-start-node',size:'30*30',label:''}"
+                <img :data-item="timeStartEventData"
                      :src="require('../assets/flow/timer-start.svg')" style="width:42px;height:42px" />
                 <div>{{i18n['timerEvent']}}</div>
-                <img data-item="{type:'message-start-node',size:'30*30',label:''}"
+                <img :data-item="messageStartEventData"
                      :src="require('../assets/flow/message-start.svg')" style="width:42px;height:42px" />
                 <div>{{i18n['messageEvent']}}</div>
-                <img data-item="{type:'signal-start-node',size:'30*30',label:''}"
+                <img :data-item="signalStartEventData"
                      :src="require('../assets/flow/signal-start.svg')" style="width:42px;height:42px" />
                 <div>{{i18n['signalEvent']}}</div>
             </el-collapse-item>
@@ -36,29 +36,29 @@
                 <div>{{i18n['callActivity']}}</div>
             </el-collapse-item>
             <el-collapse-item :title="i18n['gateway']" name="3">
-                <img data-item="{type:'exclusive-gateway-node',size:'40*40',label:''}"
+                <img :data-item="exclusiveGatewayData"
                      :src="require('../assets/flow/exclusive-gateway.svg')" style="width:48px;height:48px" />
                 <div>{{i18n['exclusiveGateway']}}</div>
-                <img data-item="{type:'parallel-gateway-node',size:'40*40',label:''}"
+                <img :data-item="parallelGatewayData"
                      :src="require('../assets/flow/parallel-gateway.svg')" style="width:48px;height:48px" />
                 <div>{{i18n['parallelGateway']}}</div>
-                <img data-item="{type:'inclusive-gateway-node',size:'40*40',label:''}"
+                <img :data-item="inclusiveGatewayData"
                      :src="require('../assets/flow/inclusive-gateway.svg')" style="width:48px;height:48px" />
                 <div>{{i18n['inclusiveGateway']}}</div>
             </el-collapse-item>
             <el-collapse-item :title="i18n['catch']" name="4">
-                <img data-item="{type:'timer-catch-node',size:'50*30',label:''}"
+                <img :data-item="timerCatchEventData"
                      :src="require('../assets/flow/timer-catch.svg')" style="width:58px;height:38px" />
                 <div>{{i18n['timerEvent']}}</div>
-                <img data-item="{type:'message-catch-node',size:'50*30',label:''}"
+                <img :data-item="messageCatchEventData"
                      :src="require('../assets/flow/message-catch.svg')" style="width:58px;height:38px" />
                 <div>{{i18n['messageEvent']}}</div>
-                <img data-item="{type:'signal-catch-node',size:'50*30',label:''}"
+                <img :data-item="signalCatchEventData"
                      :src="require('../assets/flow/signal-catch.svg')" style="width:58px;height:38px" />
                 <div>{{i18n['signalEvent']}}</div>
             </el-collapse-item>
             <el-collapse-item :title="i18n['end']" name="5">
-                <img data-item="{type:'end-node',size:'30*30',label:''}"
+                <img :data-item="endEventData"
                      :src="require('../assets/flow/end.svg')" style="width:42px;height:42px" />
                 <div>{{i18n['endEvent']}}</div>
             </el-collapse-item>
@@ -77,12 +77,28 @@
     data() {
       return {
         activeNames: [],
-        userTaskData: "{type:'user-task-node',size:'80*44',label:'"+this.i18n['userTask']+"'}",
-        scriptTaskData: "{type:'script-task-node',size:'80*44',label:'"+this.i18n['scriptTask']+"'}",
-        serviceTaskData: "{type:'service-task-node',size:'80*44',label:'"+this.i18n['serviceTask']+"'}",
-        mailTaskData: "{type:'mail-task-node',size:'80*44',label:'"+this.i18n['mailTask']+"'}",
-        receiveTaskData: "{type:'receive-task-node',size:'80*44',label:'"+this.i18n['receiveTask']+"'}",
-        callActivityData: "{type:'call-activity-node',size:'80*44',label:'"+this.i18n['callActivity']+"'}",
+
+        startEventData: "{type:'start-event',size:'30*30',label:''}",
+        timeStartEventData: "{type:'timer-start-event',size:'30*30',label:''}",
+        messageStartEventData: "{type:'message-start-event',size:'30*30',label:''}",
+        signalStartEventData: "{type:'signal-start-event',size:'30*30',label:''}",
+
+        userTaskData: "{type:'user-task',size:'80*44',label:'"+this.i18n['userTask']+"'}",
+        scriptTaskData: "{type:'script-task',size:'80*44',label:'"+this.i18n['scriptTask']+"'}",
+        serviceTaskData: "{type:'service-task',size:'80*44',label:'"+this.i18n['serviceTask']+"'}",
+        mailTaskData: "{type:'mail-task',size:'80*44',label:'"+this.i18n['mailTask']+"'}",
+        receiveTaskData: "{type:'receive-task',size:'80*44',label:'"+this.i18n['receiveTask']+"'}",
+        callActivityData: "{type:'call-activity',size:'80*44',label:'"+this.i18n['callActivity']+"'}",
+
+        exclusiveGatewayData: "{type:'exclusive-gateway',size:'40*40',label:''}",
+        parallelGatewayData: "{type:'parallel-gateway',size:'40*40',label:''}",
+        inclusiveGatewayData: "{type:'inclusive-gateway',size:'40*40',label:''}",
+
+        timerCatchEventData: "{type:'timer-catch-event',size:'50*30',label:''}",
+        messageCatchEventData: "{type:'message-catch-event',size:'50*30',label:''}",
+        signalCatchEventData: "{type:'signal-catch-event',size:'50*30',label:''}",
+
+        endEventData: "{type:'end-event',size:'30*30',label:''}",
       };
     },
   }

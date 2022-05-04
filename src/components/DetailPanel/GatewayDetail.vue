@@ -1,7 +1,7 @@
 <template>
     <div :data-type="model.type">
-        <div class="panelTitle">{{model.type === 'exclusive-gateway-node' || model.type === 'gateway-node' ? i18n['exclusiveGateway']
-            : model.type === 'parallel-gateway-node' ? i18n['parallelGateway'] : i18n['inclusiveGateway']}}</div>
+        <div class="panelTitle">{{model.type === 'exclusive-gateway' || model.type === 'gateway' ? i18n['exclusiveGateway']
+            : model.type === 'parallel-gateway' ? i18n['parallelGateway'] : i18n['inclusiveGateway']}}</div>
         <div class="panelBody">
             <DefaultDetail :model="model" :onChange="onChange" :readOnly="readOnly" />
         </div>

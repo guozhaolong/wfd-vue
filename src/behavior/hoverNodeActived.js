@@ -16,7 +16,7 @@ export default function(G6){
     },
     onNodeEnter(e){
       const type = e.item.getModel().type;
-      if(type !== 'end-node' && !this.graph.get('edgeDragging')){
+      if(type !== 'end-event' && !this.graph.get('edgeDragging')){
         this.graph.setItemState(e.item, 'show-anchor', true);
       }
     },

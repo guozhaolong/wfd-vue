@@ -22,14 +22,14 @@ export default {
       modalVisible:false,
       lang: "zh",
       demoData: {
-        nodes: [{ id: 'startNode1', x: 50, y: 200, label: '', type: 'start-node', },
-          { id: 'startNode2', x: 50, y: 320, label: '', type: 'timer-start-node', },
-          { id: 'taskNode1', x: 200, y: 200, label: '主任审批', type: 'user-task-node',  },
-          { id: 'taskNode2', x: 400, y: 200, label: '经理审批', type: 'script-task-node',  },
-          { id: 'gatewayNode', x: 400, y: 320, label: '金额大于1000', type: 'inclusive-gateway-node',  },
-          { id: 'taskNode3', x: 400, y: 450, label: '董事长审批', type: 'receive-task-node', },
-          { id: 'catchNode1', x: 600, y: 200, label: '等待结束', type: 'signal-catch-node', },
-          { id: 'endNode', x: 600, y: 320, label: '', type: 'end-node', }],
+        nodes: [{ id: 'startNode1', x: 50, y: 200, label: '', type: 'start-event', },
+          { id: 'startNode2', x: 50, y: 320, label: '', type: 'timer-start-event', },
+          { id: 'taskNode1', x: 200, y: 200, label: '主任审批', type: 'user-task',  },
+          { id: 'taskNode2', x: 400, y: 200, label: '经理审批', type: 'script-task',  },
+          { id: 'gatewayNode', x: 400, y: 320, label: '金额大于1000', type: 'inclusive-gateway',  },
+          { id: 'taskNode3', x: 400, y: 450, label: '董事长审批', type: 'receive-task', },
+          { id: 'catchNode1', x: 600, y: 200, label: '等待结束', type: 'signal-catch-event', },
+          { id: 'endNode', x: 600, y: 320, label: '', type: 'end-event', }],
         edges: [{ source: 'startNode1', target: 'taskNode1', sourceAnchor:1, targetAnchor:3, },
           { source: 'startNode2', target: 'gatewayNode', sourceAnchor:1, targetAnchor:3, },
           { source: 'taskNode1', target: 'catchNode1', sourceAnchor:0, targetAnchor:0, },
@@ -42,14 +42,14 @@ export default {
           { source: 'catchNode1', target: 'endNode', sourceAnchor:1, targetAnchor:0, }]
       },
       demoData1:{
-        nodes: [{ id: 'startNode1', x: 50, y: 200, label: '', type: 'start-node', },
-          { id: 'startNode2', x: 50, y: 320, label: '', type: 'timer-start-node', },
-          { id: 'taskNode1', x: 200, y: 200, label: '主任审批', type: 'user-task-node',  },
-          { id: 'taskNode2', x: 400, y: 200, label: '经理审批', type: 'script-task-node', active:true },
-          { id: 'gatewayNode', x: 400, y: 320, label: '金额大于1000', type: 'gateway-node',  },
-          { id: 'taskNode3', x: 400, y: 450, label: '董事长审批', type: 'receive-task-node', },
-          { id: 'catchNode1', x: 600, y: 200, label: '等待结束', type: 'signal-catch-node', },
-          { id: 'endNode', x: 600, y: 320, label: '', type: 'end', }],
+        nodes: [{ id: 'startNode1', x: 50, y: 200, label: '', type: 'start-event', },
+          { id: 'startNode2', x: 50, y: 320, label: '', type: 'timer-start-event', },
+          { id: 'taskNode1', x: 200, y: 200, label: '主任审批', type: 'user-task',  },
+          { id: 'taskNode2', x: 400, y: 200, label: '经理审批', type: 'script-task', active:true },
+          { id: 'gatewayNode', x: 400, y: 320, label: '金额大于1000', type: 'gateway',  },
+          { id: 'taskNode3', x: 400, y: 450, label: '董事长审批', type: 'receive-task', },
+          { id: 'catchNode1', x: 600, y: 200, label: '等待结束', type: 'signal-catch-event', },
+          { id: 'endNode', x: 600, y: 320, label: '', type: 'end-event', }],
         edges: [{ source: 'startNode1', target: 'taskNode1', sourceAnchor:1, targetAnchor:3 },
           { source: 'startNode2', target: 'gatewayNode', sourceAnchor:1, targetAnchor:3 },
           { source: 'taskNode1', target: 'catchNode1', sourceAnchor:0, targetAnchor:0 },
@@ -96,13 +96,13 @@ export default {
   },
   methods: {
     printJSON () {
-      this.$refs['wfd'].validate().then(() => {
+      // this.$refs['wfd'].validate().then(() => {
         let content = {
           data: this.$refs['wfd'].graph.save(),
           processData: this.$refs['wfd'].processModel
         }
         console.log(content)
-      })
+      // })
     }
   }
 }

@@ -193,7 +193,7 @@ class Command{
         const addModel = this.pasteData.model;
         addModel.x && (addModel.x += 10);
         addModel.y && (addModel.y += 10);
-        const { type = 'user-task-node' } = addModel;
+        const { type = 'user-task' } = addModel;
         const timestamp = new Date().getTime();
         const id = type + '-' + timestamp;
         addModel.id = id;

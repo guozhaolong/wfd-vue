@@ -239,7 +239,7 @@
 
         // 验证节点
         for (let node of this.graph.save().nodes) {
-          if (['start-node', 'user-task-node'].includes(node.type)) {
+          if (['start-event', 'user-task'].includes(node.type)) {
             // 验证表单字段
             const formFieldIds = this.formFields.map(field => field.id)
             if (node.readonlyFormFields && node.readonlyFormFields.length !== 0 && !formFieldIds.some(id => node.readonlyFormFields.includes(id))) {
@@ -265,7 +265,7 @@
             }
           }
 
-          if (node.type === 'user-task-node') {
+          if (node.type === 'user-task') {
             // 验证指派类型
             if (!['assignee', 'candidate'].includes(node.assignType)) {
               await this.$message({
