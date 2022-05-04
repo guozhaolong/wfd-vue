@@ -25,7 +25,7 @@ module.exports = {
   },
   css: { extract: false },
   devServer:{
-    port: 8000,
+    port: 8080,
     hot: true,
     open: 'Google Chrome'
   }
