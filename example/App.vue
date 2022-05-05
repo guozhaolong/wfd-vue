@@ -97,11 +97,11 @@ export default {
   methods: {
     printJSON () {
       this.$refs['wfd'].validate().then(() => {
-        let content = {
-          data: this.$refs['wfd'].graph.save(),
-          processData: this.$refs['wfd'].processModel
+        let data = {
+          graph: this.$refs['wfd'].graph.save(),
+          config: this.$refs['wfd'].processModel
         }
-        console.log(content)
+        console.log(data)
       })
     }
   }
