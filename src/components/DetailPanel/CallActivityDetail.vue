@@ -1,16 +1,16 @@
 <template>
-  <div :data-type="model.type">
-    <div class="panelTitle">{{i18n['callActivity']}}</div>
-    <div class="panelBody">
+  <div :data-type="model.type" style="height: 100%">
+    <div class="panel-title">{{i18n['callActivity']}}</div>
+    <el-scrollbar wrap-style="overflow-x: hidden !important;" class="panel-body">
       <DefaultDetail :model="model" :onChange="onChange" :readOnly="readOnly" />
-      <div class="panelRow">
+      <div class="panel-row">
         <div>{{i18n['callActivity.calledElement']}}：</div>
         <el-input style="width:90%; font-size:12px"
                   :disabled="readOnly"
                   :value="model.calledElement"
                   @input="(value) => {onChange('calledElement', value)}" />
       </div>
-    </div>
+    </el-scrollbar>
   </div>
 </template>
 <script>

@@ -1,22 +1,22 @@
 <template>
-    <div :data-type="model.type">
-        <div class="panelTitle">{{i18n['process']}}</div>
-        <div class="panelBody">
-            <div class="panelRow">
+    <div :data-type="model.type" style="height: 100%">
+        <div class="panel-title">{{i18n['process']}}</div>
+        <el-scrollbar wrap-style="overflow-x: hidden !important;" class="panel-body" >
+            <div class="panel-row">
                 <div>{{i18n['process.id']}}：</div>
                 <el-input style="width:90%; font-size:12px"
                           :disabled="readOnly"
                           :value="model.id"
                           @input="(value) => {onChange('id', value)}" />
             </div>
-            <div class="panelRow">
+            <div class="panel-row">
                 <div>{{i18n['process.name']}}：</div>
                 <el-input style="width:90%; font-size:12px"
                           :disabled="readOnly"
                           :value="model.name"
                           @input="(value) => {onChange('name', value)}" />
             </div>
-            <div class="panelRow">
+            <div class="panel-row">
               <div>{{i18n['process.form']}}：</div>
               <el-select style="width:90%; font-size:12px"
                          :disabled="readOnly"
@@ -28,7 +28,7 @@
                 <el-option v-for="form in formsCopy" :key="form.id" :label="form.name" :value="form.id" />
               </el-select>
             </div>
-            <div class="panelRow">
+            <div class="panel-row">
               <div>{{i18n['process.starterUsers']}}：</div>
               <el-select style="width:90%; font-size:12px"
                          :placeholder="i18n['process.starterUsers.placeholder']"
@@ -40,7 +40,7 @@
                 <el-option v-for="user in usersCopy" :key="user.id" :label="user.name" :value="user.id" />
               </el-select>
             </div>
-            <div class="panelRow">
+            <div class="panel-row">
               <div>{{i18n['process.starterGroups']}}：</div>
               <el-select style="width:90%; font-size:12px"
                          :placeholder="i18n['process.starterGroups.placeholder']"
@@ -52,7 +52,7 @@
                 <el-option v-for="group in groupsCopy" :key="group.id" :label="group.name" :value="group.id" />
               </el-select>
             </div>
-            <div class="panelRow">
+            <div class="panel-row">
               <div style="display:inline">{{i18n['timeLimit']}}：</div>
               <el-input-number style="width: 100px;"
                                :value="model.timeLimit"
@@ -73,25 +73,25 @@
                 <el-option key="year" value="year" :label="i18n['timeLimit.unit.year']"/>
               </el-select>
             </div>
-            <div class="panelRow">
+            <div class="panel-row">
                 <div>
                     {{i18n['process.dataObjs']}}：
                     <el-button :disabled="readOnly" size="mini" @click="()=>{showDialog('dataObjs')}">{{i18n['tooltip.edit']}}</el-button>
                 </div>
             </div>
-            <div class="panelRow">
+            <div class="panel-row">
                 <div>
                     {{i18n['process.signalDefs']}}：
                     <el-button :disabled="readOnly" size="mini" @click="()=>{showDialog('signalDefs')}">{{i18n['tooltip.edit']}}</el-button>
                 </div>
             </div>
-            <div class="panelRow">
+            <div class="panel-row">
                 <div>
                     {{i18n['process.messageDefs']}}：
                     <el-button :disabled="readOnly" size="mini" @click="()=>{showDialog('messageDefs')}">{{i18n['tooltip.edit']}}</el-button>
                 </div>
             </div>
-        </div>
+        </el-scrollbar>
 
         <el-dialog :title="i18n[`process.${table}`]" :visible.sync="dialogVisible" @close="closeDialog" append-to-body width="60%">
           <ele-table-editor
@@ -131,6 +131,10 @@
   export default {
     inject: ['i18n'],
     props: {
+      height: {
+        type: Number,
+        default: 800,
+      },
       model: {
         type:Object,
         default: ()=>({}),

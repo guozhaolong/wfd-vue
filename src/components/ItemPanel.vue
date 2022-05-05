@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar wrap-class="scrollbar-wrapper" class="item-panel" :style="{'height': height+'px'}">
+  <el-scrollbar wrap-style="overflow-x: hidden !important;" class="item-panel" :style="{'height': height+'px'}">
     <el-collapse v-model="activeNames">
       <el-collapse-item :title="i18n['start']" name="1">
         <img :data-item="startEventData"
@@ -111,10 +111,6 @@ export default {
   background: #f0f2f5;
   border-left: 1px solid #E9E9E9;
   border-bottom: 1px solid #E9E9E9;
-
-  .scrollbar-wrapper {
-    overflow-x: hidden !important;
-  }
 
   img {
     width: 92px;
